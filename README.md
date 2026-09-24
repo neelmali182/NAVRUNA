@@ -26,14 +26,14 @@ NAVRUNA is an AI-powered maritime simulation platform for testing and developing
 
 ## How to Use
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/NAVRUNA.git
 cd NAVRUNA
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -53,9 +53,9 @@ or:
 run_navruna.bat
 ```
 
-### 4. Open the application
+### 4. Open the Application
 
-After starting the project, open the local URL shown in the terminal, usually:
+Open the local URL shown in the terminal, usually:
 
 ```text
 http://localhost:8000
@@ -65,7 +65,7 @@ http://localhost:8000
 
 1. Open the NAVRUNA dashboard.
 2. Select **Simulation**.
-3. Choose a vessel and route.
+3. Select a vessel and route.
 4. Start the simulation.
 5. Observe the vessel navigation and route performance.
 6. Use the training section to experiment with the Reinforcement Learning model.
@@ -77,7 +77,3 @@ To develop an intelligent maritime navigation system that can find efficient rou
 ## Status
 
 🚧 **Under Development**
-
-## License
-
-MIT License
