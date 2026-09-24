@@ -1,0 +1,2234 @@
+[
+  {
+    "id": "INMUM",
+    "name": "Mumbai",
+    "country": "India",
+    "lat": 18.94,
+    "lon": 72.84,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INNSA",
+    "name": "Nhava Sheva (JNPT)",
+    "country": "India",
+    "lat": 18.95,
+    "lon": 72.95,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INPAV",
+    "name": "Pipavav",
+    "country": "India",
+    "lat": 20.9,
+    "lon": 71.5,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INMUN",
+    "name": "Mundra",
+    "country": "India",
+    "lat": 22.74,
+    "lon": 69.71,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INKRI",
+    "name": "Kandla",
+    "country": "India",
+    "lat": 23.03,
+    "lon": 70.22,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INPPR",
+    "name": "Paradip",
+    "country": "India",
+    "lat": 20.27,
+    "lon": 86.7,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "INMAA",
+    "name": "Chennai",
+    "country": "India",
+    "lat": 13.08,
+    "lon": 80.29,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "INHZA",
+    "name": "Hazira",
+    "country": "India",
+    "lat": 21.12,
+    "lon": 72.65,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "INKOC",
+    "name": "Kochi",
+    "country": "India",
+    "lat": 9.97,
+    "lon": 76.27,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "INVTZ",
+    "name": "Visakhapatnam",
+    "country": "India",
+    "lat": 17.69,
+    "lon": 83.29,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "INENR",
+    "name": "Ennore (Kamarajar)",
+    "country": "India",
+    "lat": 13.25,
+    "lon": 80.34,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "INDHN",
+    "name": "Dhamra",
+    "country": "India",
+    "lat": 20.79,
+    "lon": 86.95,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "INNEW",
+    "name": "New Mangalore",
+    "country": "India",
+    "lat": 12.92,
+    "lon": 74.83,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "INPOR",
+    "name": "Tuticorin (V.O.C.)",
+    "country": "India",
+    "lat": 8.76,
+    "lon": 78.14,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "INMPT",
+    "name": "Mormugao",
+    "country": "India",
+    "lat": 15.42,
+    "lon": 73.8,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "INHAL",
+    "name": "Haldia",
+    "country": "India",
+    "lat": 22.03,
+    "lon": 88.07,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "AEDXB",
+    "name": "Dubai",
+    "country": "UAE",
+    "lat": 25.27,
+    "lon": 55.3,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "AEJEA",
+    "name": "Jebel Ali",
+    "country": "UAE",
+    "lat": 24.99,
+    "lon": 55.06,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "AEFJR",
+    "name": "Fujairah",
+    "country": "UAE",
+    "lat": 25.12,
+    "lon": 56.36,
+    "region": "Gulf of Oman"
+  },
+  {
+    "id": "AEAUH",
+    "name": "Abu Dhabi",
+    "country": "UAE",
+    "lat": 24.48,
+    "lon": 54.37,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "OMSLL",
+    "name": "Salalah",
+    "country": "Oman",
+    "lat": 16.96,
+    "lon": 54.0,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "OMSOH",
+    "name": "Sohar",
+    "country": "Oman",
+    "lat": 24.35,
+    "lon": 56.73,
+    "region": "Gulf of Oman"
+  },
+  {
+    "id": "OMMCT",
+    "name": "Muscat",
+    "country": "Oman",
+    "lat": 23.62,
+    "lon": 58.59,
+    "region": "Gulf of Oman"
+  },
+  {
+    "id": "QADOH",
+    "name": "Doha",
+    "country": "Qatar",
+    "lat": 25.29,
+    "lon": 51.53,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "SAJED",
+    "name": "Jeddah",
+    "country": "Saudi Arabia",
+    "lat": 21.49,
+    "lon": 39.17,
+    "region": "Red Sea"
+  },
+  {
+    "id": "SADMM",
+    "name": "Dammam",
+    "country": "Saudi Arabia",
+    "lat": 26.44,
+    "lon": 50.1,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "SAJUB",
+    "name": "Jubail",
+    "country": "Saudi Arabia",
+    "lat": 27.02,
+    "lon": 49.66,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "YEADE",
+    "name": "Aden",
+    "country": "Yemen",
+    "lat": 12.79,
+    "lon": 45.03,
+    "region": "Gulf of Aden"
+  },
+  {
+    "id": "DJJIB",
+    "name": "Djibouti",
+    "country": "Djibouti",
+    "lat": 11.59,
+    "lon": 43.15,
+    "region": "Gulf of Aden"
+  },
+  {
+    "id": "OMSUR",
+    "name": "Sur",
+    "country": "Oman",
+    "lat": 22.57,
+    "lon": 59.53,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "PKKHI",
+    "name": "Karachi",
+    "country": "Pakistan",
+    "lat": 24.85,
+    "lon": 66.99,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "PKQAS",
+    "name": "Port Qasim",
+    "country": "Pakistan",
+    "lat": 24.77,
+    "lon": 67.33,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "BDCGP",
+    "name": "Chattogram",
+    "country": "Bangladesh",
+    "lat": 22.33,
+    "lon": 91.82,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "BDMGL",
+    "name": "Mongla",
+    "country": "Bangladesh",
+    "lat": 22.47,
+    "lon": 89.6,
+    "region": "Bay of Bengal"
+  },
+  {
+    "id": "LKCMB",
+    "name": "Colombo",
+    "country": "Sri Lanka",
+    "lat": 6.93,
+    "lon": 79.85,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "LKHBT",
+    "name": "Hambantota",
+    "country": "Sri Lanka",
+    "lat": 6.12,
+    "lon": 81.12,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MVMLE",
+    "name": "Male",
+    "country": "Maldives",
+    "lat": 4.18,
+    "lon": 73.51,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MYTPP",
+    "name": "Tanjung Pelepas",
+    "country": "Malaysia",
+    "lat": 1.37,
+    "lon": 103.55,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "MYKUL",
+    "name": "Port Klang",
+    "country": "Malaysia",
+    "lat": 3.0,
+    "lon": 101.39,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "MYPGU",
+    "name": "Penang",
+    "country": "Malaysia",
+    "lat": 5.42,
+    "lon": 100.35,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "SGSIN",
+    "name": "Singapore",
+    "country": "Singapore",
+    "lat": 1.29,
+    "lon": 103.85,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "IDTPP",
+    "name": "Tanjung Priok",
+    "country": "Indonesia",
+    "lat": -6.1,
+    "lon": 106.88,
+    "region": "Java Sea"
+  },
+  {
+    "id": "IDSUB",
+    "name": "Surabaya",
+    "country": "Indonesia",
+    "lat": -7.21,
+    "lon": 112.73,
+    "region": "Java Sea"
+  },
+  {
+    "id": "IDBPN",
+    "name": "Balikpapan",
+    "country": "Indonesia",
+    "lat": -1.27,
+    "lon": 116.83,
+    "region": "Makassar Strait"
+  },
+  {
+    "id": "IDMKS",
+    "name": "Makassar",
+    "country": "Indonesia",
+    "lat": -5.13,
+    "lon": 119.41,
+    "region": "Makassar Strait"
+  },
+  {
+    "id": "IDBTM",
+    "name": "Batam",
+    "country": "Indonesia",
+    "lat": 1.13,
+    "lon": 104.05,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "THLCH",
+    "name": "Laem Chabang",
+    "country": "Thailand",
+    "lat": 13.08,
+    "lon": 100.88,
+    "region": "Gulf of Thailand"
+  },
+  {
+    "id": "THBKK",
+    "name": "Bangkok Port",
+    "country": "Thailand",
+    "lat": 13.72,
+    "lon": 100.57,
+    "region": "Gulf of Thailand"
+  },
+  {
+    "id": "VNSGN",
+    "name": "Ho Chi Minh City",
+    "country": "Vietnam",
+    "lat": 10.77,
+    "lon": 106.7,
+    "region": "South China Sea"
+  },
+  {
+    "id": "VNVUT",
+    "name": "Vung Tau",
+    "country": "Vietnam",
+    "lat": 10.35,
+    "lon": 107.08,
+    "region": "South China Sea"
+  },
+  {
+    "id": "VNDAD",
+    "name": "Da Nang",
+    "country": "Vietnam",
+    "lat": 16.07,
+    "lon": 108.22,
+    "region": "South China Sea"
+  },
+  {
+    "id": "PHMNL",
+    "name": "Manila",
+    "country": "Philippines",
+    "lat": 14.6,
+    "lon": 120.98,
+    "region": "South China Sea"
+  },
+  {
+    "id": "PHBAT",
+    "name": "Batangas",
+    "country": "Philippines",
+    "lat": 13.76,
+    "lon": 121.06,
+    "region": "South China Sea"
+  },
+  {
+    "id": "PHCEB",
+    "name": "Cebu",
+    "country": "Philippines",
+    "lat": 10.31,
+    "lon": 123.89,
+    "region": "Philippine Sea"
+  },
+  {
+    "id": "HKHKG",
+    "name": "Hong Kong",
+    "country": "Hong Kong",
+    "lat": 22.29,
+    "lon": 114.17,
+    "region": "South China Sea"
+  },
+  {
+    "id": "CNSHA",
+    "name": "Shanghai",
+    "country": "China",
+    "lat": 31.23,
+    "lon": 121.47,
+    "region": "East China Sea"
+  },
+  {
+    "id": "CNNGB",
+    "name": "Ningbo-Zhoushan",
+    "country": "China",
+    "lat": 29.87,
+    "lon": 121.55,
+    "region": "East China Sea"
+  },
+  {
+    "id": "CNSZX",
+    "name": "Shenzhen",
+    "country": "China",
+    "lat": 22.54,
+    "lon": 114.06,
+    "region": "South China Sea"
+  },
+  {
+    "id": "CNQZH",
+    "name": "Qingdao",
+    "country": "China",
+    "lat": 36.07,
+    "lon": 120.38,
+    "region": "Yellow Sea"
+  },
+  {
+    "id": "CNTSN",
+    "name": "Tianjin",
+    "country": "China",
+    "lat": 38.99,
+    "lon": 117.7,
+    "region": "Bohai Sea"
+  },
+  {
+    "id": "CNXMN",
+    "name": "Xiamen",
+    "country": "China",
+    "lat": 24.48,
+    "lon": 118.09,
+    "region": "Taiwan Strait"
+  },
+  {
+    "id": "CNFZH",
+    "name": "Fuzhou",
+    "country": "China",
+    "lat": 26.07,
+    "lon": 119.3,
+    "region": "Taiwan Strait"
+  },
+  {
+    "id": "CNFOC",
+    "name": "Guangzhou",
+    "country": "China",
+    "lat": 23.1,
+    "lon": 113.26,
+    "region": "Pearl River"
+  },
+  {
+    "id": "CNDAL",
+    "name": "Dalian",
+    "country": "China",
+    "lat": 38.91,
+    "lon": 121.6,
+    "region": "Yellow Sea"
+  },
+  {
+    "id": "CNYTN",
+    "name": "Yantian",
+    "country": "China",
+    "lat": 22.57,
+    "lon": 114.27,
+    "region": "South China Sea"
+  },
+  {
+    "id": "TWKHH",
+    "name": "Kaohsiung",
+    "country": "Taiwan",
+    "lat": 22.62,
+    "lon": 120.28,
+    "region": "Taiwan Strait"
+  },
+  {
+    "id": "TWKEL",
+    "name": "Keelung",
+    "country": "Taiwan",
+    "lat": 25.13,
+    "lon": 121.74,
+    "region": "East China Sea"
+  },
+  {
+    "id": "JPTYO",
+    "name": "Tokyo",
+    "country": "Japan",
+    "lat": 35.62,
+    "lon": 139.78,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPTYB",
+    "name": "Yokohama",
+    "country": "Japan",
+    "lat": 35.45,
+    "lon": 139.65,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPOSA",
+    "name": "Osaka",
+    "country": "Japan",
+    "lat": 34.65,
+    "lon": 135.43,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPKOB",
+    "name": "Kobe",
+    "country": "Japan",
+    "lat": 34.68,
+    "lon": 135.19,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPNGO",
+    "name": "Nagoya",
+    "country": "Japan",
+    "lat": 35.09,
+    "lon": 136.88,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPHKT",
+    "name": "Hakata",
+    "country": "Japan",
+    "lat": 33.6,
+    "lon": 130.4,
+    "region": "Pacific"
+  },
+  {
+    "id": "JPMOJ",
+    "name": "Moji",
+    "country": "Japan",
+    "lat": 33.95,
+    "lon": 130.96,
+    "region": "Pacific"
+  },
+  {
+    "id": "KRPTK",
+    "name": "Pyeongtaek",
+    "country": "South Korea",
+    "lat": 36.99,
+    "lon": 126.84,
+    "region": "Yellow Sea"
+  },
+  {
+    "id": "KRPUS",
+    "name": "Busan",
+    "country": "South Korea",
+    "lat": 35.1,
+    "lon": 129.04,
+    "region": "Korea Strait"
+  },
+  {
+    "id": "KRINC",
+    "name": "Incheon",
+    "country": "South Korea",
+    "lat": 37.45,
+    "lon": 126.61,
+    "region": "Yellow Sea"
+  },
+  {
+    "id": "KRGUN",
+    "name": "Gwangyang",
+    "country": "South Korea",
+    "lat": 34.93,
+    "lon": 127.7,
+    "region": "Korea Strait"
+  },
+  {
+    "id": "RUVVO",
+    "name": "Vladivostok",
+    "country": "Russia",
+    "lat": 43.12,
+    "lon": 131.9,
+    "region": "Pacific"
+  },
+  {
+    "id": "RUSPB",
+    "name": "St Petersburg",
+    "country": "Russia",
+    "lat": 59.93,
+    "lon": 30.25,
+    "region": "Baltic Sea"
+  },
+  {
+    "id": "RUNKH",
+    "name": "Novorossiysk",
+    "country": "Russia",
+    "lat": 44.72,
+    "lon": 37.77,
+    "region": "Black Sea"
+  },
+  {
+    "id": "AUMEL",
+    "name": "Melbourne",
+    "country": "Australia",
+    "lat": -37.84,
+    "lon": 144.94,
+    "region": "Pacific"
+  },
+  {
+    "id": "AUSYD",
+    "name": "Sydney",
+    "country": "Australia",
+    "lat": -33.87,
+    "lon": 151.21,
+    "region": "Pacific"
+  },
+  {
+    "id": "AUBNE",
+    "name": "Brisbane",
+    "country": "Australia",
+    "lat": -27.38,
+    "lon": 153.17,
+    "region": "Pacific"
+  },
+  {
+    "id": "AUFRE",
+    "name": "Fremantle",
+    "country": "Australia",
+    "lat": -32.06,
+    "lon": 115.74,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "AUPHE",
+    "name": "Port Hedland",
+    "country": "Australia",
+    "lat": -20.31,
+    "lon": 118.58,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "AUDAR",
+    "name": "Darwin",
+    "country": "Australia",
+    "lat": -12.46,
+    "lon": 130.85,
+    "region": "Timor Sea"
+  },
+  {
+    "id": "AUSUG",
+    "name": "Gladstone",
+    "country": "Australia",
+    "lat": -23.84,
+    "lon": 151.26,
+    "region": "Pacific"
+  },
+  {
+    "id": "AUADL",
+    "name": "Adelaide",
+    "country": "Australia",
+    "lat": -34.85,
+    "lon": 138.5,
+    "region": "Southern Ocean"
+  },
+  {
+    "id": "NZAKL",
+    "name": "Auckland",
+    "country": "New Zealand",
+    "lat": -36.85,
+    "lon": 174.76,
+    "region": "Pacific"
+  },
+  {
+    "id": "NZLYT",
+    "name": "Lyttelton",
+    "country": "New Zealand",
+    "lat": -43.6,
+    "lon": 172.72,
+    "region": "Pacific"
+  },
+  {
+    "id": "NZTRG",
+    "name": "Tauranga",
+    "country": "New Zealand",
+    "lat": -37.65,
+    "lon": 176.17,
+    "region": "Pacific"
+  },
+  {
+    "id": "NZPOE",
+    "name": "Port Chalmers",
+    "country": "New Zealand",
+    "lat": -45.82,
+    "lon": 170.63,
+    "region": "Pacific"
+  },
+  {
+    "id": "LKTRI",
+    "name": "Trincomalee",
+    "country": "Sri Lanka",
+    "lat": 8.57,
+    "lon": 81.23,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MYPKG",
+    "name": "Pasir Gudang",
+    "country": "Malaysia",
+    "lat": 1.47,
+    "lon": 103.9,
+    "region": "Malacca Strait"
+  },
+  {
+    "id": "MMRGN",
+    "name": "Yangon",
+    "country": "Myanmar",
+    "lat": 16.77,
+    "lon": 96.17,
+    "region": "Andaman Sea"
+  },
+  {
+    "id": "MMTHL",
+    "name": "Thilawa",
+    "country": "Myanmar",
+    "lat": 16.68,
+    "lon": 96.26,
+    "region": "Andaman Sea"
+  },
+  {
+    "id": "KHSHV",
+    "name": "Sihanoukville",
+    "country": "Cambodia",
+    "lat": 10.63,
+    "lon": 103.5,
+    "region": "Gulf of Thailand"
+  },
+  {
+    "id": "BNMUA",
+    "name": "Muara",
+    "country": "Brunei",
+    "lat": 5.03,
+    "lon": 115.07,
+    "region": "South China Sea"
+  },
+  {
+    "id": "PAPNH",
+    "name": "Port Moresby",
+    "country": "Papua New Guinea",
+    "lat": -9.47,
+    "lon": 147.15,
+    "region": "Coral Sea"
+  },
+  {
+    "id": "FJSUV",
+    "name": "Suva",
+    "country": "Fiji",
+    "lat": -18.14,
+    "lon": 178.44,
+    "region": "Pacific"
+  },
+  {
+    "id": "PFPPT",
+    "name": "Papeete",
+    "country": "French Polynesia",
+    "lat": -17.54,
+    "lon": -149.57,
+    "region": "Pacific"
+  },
+  {
+    "id": "USLAX",
+    "name": "Los Angeles",
+    "country": "USA",
+    "lat": 33.74,
+    "lon": -118.27,
+    "region": "Pacific"
+  },
+  {
+    "id": "USLGB",
+    "name": "Long Beach",
+    "country": "USA",
+    "lat": 33.77,
+    "lon": -118.2,
+    "region": "Pacific"
+  },
+  {
+    "id": "USSEA",
+    "name": "Seattle",
+    "country": "USA",
+    "lat": 47.6,
+    "lon": -122.34,
+    "region": "Pacific"
+  },
+  {
+    "id": "USOAK",
+    "name": "Oakland",
+    "country": "USA",
+    "lat": 37.8,
+    "lon": -122.28,
+    "region": "Pacific"
+  },
+  {
+    "id": "USPDX",
+    "name": "Portland Oregon",
+    "country": "USA",
+    "lat": 45.52,
+    "lon": -122.67,
+    "region": "Pacific"
+  },
+  {
+    "id": "USNYC",
+    "name": "New York",
+    "country": "USA",
+    "lat": 40.71,
+    "lon": -74.01,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USNWK",
+    "name": "Newark",
+    "country": "USA",
+    "lat": 40.69,
+    "lon": -74.15,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USSAV",
+    "name": "Savannah",
+    "country": "USA",
+    "lat": 32.08,
+    "lon": -81.09,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USCHS",
+    "name": "Charleston",
+    "country": "USA",
+    "lat": 32.78,
+    "lon": -79.93,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USHOU",
+    "name": "Houston",
+    "country": "USA",
+    "lat": 29.73,
+    "lon": -95.27,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "USLCH",
+    "name": "Lake Charles",
+    "country": "USA",
+    "lat": 30.23,
+    "lon": -93.22,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "USNOL",
+    "name": "New Orleans",
+    "country": "USA",
+    "lat": 29.95,
+    "lon": -90.07,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "USMIA",
+    "name": "Miami",
+    "country": "USA",
+    "lat": 25.77,
+    "lon": -80.19,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USBAL",
+    "name": "Baltimore",
+    "country": "USA",
+    "lat": 39.27,
+    "lon": -76.58,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USPHL",
+    "name": "Philadelphia",
+    "country": "USA",
+    "lat": 39.95,
+    "lon": -75.14,
+    "region": "Atlantic"
+  },
+  {
+    "id": "USNOR",
+    "name": "Norfolk",
+    "country": "USA",
+    "lat": 36.85,
+    "lon": -76.29,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CAMTR",
+    "name": "Montreal",
+    "country": "Canada",
+    "lat": 45.5,
+    "lon": -73.55,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CAVAN",
+    "name": "Vancouver",
+    "country": "Canada",
+    "lat": 49.29,
+    "lon": -123.11,
+    "region": "Pacific"
+  },
+  {
+    "id": "CAHAL",
+    "name": "Halifax",
+    "country": "Canada",
+    "lat": 44.65,
+    "lon": -63.57,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CAPR",
+    "name": "Prince Rupert",
+    "country": "Canada",
+    "lat": 54.31,
+    "lon": -130.32,
+    "region": "Pacific"
+  },
+  {
+    "id": "MXMZT",
+    "name": "Manzanillo",
+    "country": "Mexico",
+    "lat": 19.05,
+    "lon": -104.32,
+    "region": "Pacific"
+  },
+  {
+    "id": "MXVER",
+    "name": "Veracruz",
+    "country": "Mexico",
+    "lat": 19.19,
+    "lon": -96.14,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "MXALT",
+    "name": "Altamira",
+    "country": "Mexico",
+    "lat": 22.4,
+    "lon": -97.9,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "PAPTY",
+    "name": "Balboa",
+    "country": "Panama",
+    "lat": 8.96,
+    "lon": -79.57,
+    "region": "Pacific"
+  },
+  {
+    "id": "PACTN",
+    "name": "Cristobal",
+    "country": "Panama",
+    "lat": 9.36,
+    "lon": -79.9,
+    "region": "Caribbean"
+  },
+  {
+    "id": "COCTG",
+    "name": "Cartagena",
+    "country": "Colombia",
+    "lat": 10.4,
+    "lon": -75.53,
+    "region": "Caribbean"
+  },
+  {
+    "id": "COBUN",
+    "name": "Buenaventura",
+    "country": "Colombia",
+    "lat": 3.88,
+    "lon": -77.03,
+    "region": "Pacific"
+  },
+  {
+    "id": "ECGYE",
+    "name": "Guayaquil",
+    "country": "Ecuador",
+    "lat": -2.19,
+    "lon": -79.89,
+    "region": "Pacific"
+  },
+  {
+    "id": "PECLL",
+    "name": "Callao",
+    "country": "Peru",
+    "lat": -12.05,
+    "lon": -77.15,
+    "region": "Pacific"
+  },
+  {
+    "id": "CLVAP",
+    "name": "Valparaiso",
+    "country": "Chile",
+    "lat": -33.04,
+    "lon": -71.63,
+    "region": "Pacific"
+  },
+  {
+    "id": "CLSAI",
+    "name": "San Antonio Chile",
+    "country": "Chile",
+    "lat": -33.59,
+    "lon": -71.62,
+    "region": "Pacific"
+  },
+  {
+    "id": "ARBUE",
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "lat": -34.6,
+    "lon": -58.38,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRSSZ",
+    "name": "Santos",
+    "country": "Brazil",
+    "lat": -23.96,
+    "lon": -46.3,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRRIG",
+    "name": "Rio Grande",
+    "country": "Brazil",
+    "lat": -32.03,
+    "lon": -52.1,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRRIO",
+    "name": "Rio de Janeiro",
+    "country": "Brazil",
+    "lat": -22.9,
+    "lon": -43.17,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRVIX",
+    "name": "Vitoria",
+    "country": "Brazil",
+    "lat": -20.32,
+    "lon": -40.29,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRSSA",
+    "name": "Salvador",
+    "country": "Brazil",
+    "lat": -12.97,
+    "lon": -38.51,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRPEC",
+    "name": "Pecem",
+    "country": "Brazil",
+    "lat": -3.54,
+    "lon": -38.81,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRMAO",
+    "name": "Manaus",
+    "country": "Brazil",
+    "lat": -3.14,
+    "lon": -60.02,
+    "region": "Amazon"
+  },
+  {
+    "id": "UYMON",
+    "name": "Montevideo",
+    "country": "Uruguay",
+    "lat": -34.9,
+    "lon": -56.16,
+    "region": "Atlantic"
+  },
+  {
+    "id": "GUGUA",
+    "name": "Guam",
+    "country": "Guam",
+    "lat": 13.44,
+    "lon": 144.65,
+    "region": "Pacific"
+  },
+  {
+    "id": "JMKIN",
+    "name": "Kingston",
+    "country": "Jamaica",
+    "lat": 17.97,
+    "lon": -76.79,
+    "region": "Caribbean"
+  },
+  {
+    "id": "DOCAU",
+    "name": "Caucedo",
+    "country": "Dominican Republic",
+    "lat": 18.43,
+    "lon": -69.63,
+    "region": "Caribbean"
+  },
+  {
+    "id": "TTPTS",
+    "name": "Point Lisas",
+    "country": "Trinidad and Tobago",
+    "lat": 10.4,
+    "lon": -61.47,
+    "region": "Caribbean"
+  },
+  {
+    "id": "BSFPO",
+    "name": "Freeport",
+    "country": "Bahamas",
+    "lat": 26.53,
+    "lon": -78.7,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BBBGI",
+    "name": "Bridgetown",
+    "country": "Barbados",
+    "lat": 13.1,
+    "lon": -59.62,
+    "region": "Caribbean"
+  },
+  {
+    "id": "NLRTM",
+    "name": "Rotterdam",
+    "country": "Netherlands",
+    "lat": 51.95,
+    "lon": 4.14,
+    "region": "North Sea"
+  },
+  {
+    "id": "DEHAM",
+    "name": "Hamburg",
+    "country": "Germany",
+    "lat": 53.55,
+    "lon": 9.99,
+    "region": "North Sea"
+  },
+  {
+    "id": "DEBRV",
+    "name": "Bremerhaven",
+    "country": "Germany",
+    "lat": 53.55,
+    "lon": 8.58,
+    "region": "North Sea"
+  },
+  {
+    "id": "BEANR",
+    "name": "Antwerp-Bruges",
+    "country": "Belgium",
+    "lat": 51.26,
+    "lon": 4.4,
+    "region": "North Sea"
+  },
+  {
+    "id": "GBFXT",
+    "name": "Felixstowe",
+    "country": "UK",
+    "lat": 51.96,
+    "lon": 1.35,
+    "region": "North Sea"
+  },
+  {
+    "id": "GBLON",
+    "name": "London Gateway",
+    "country": "UK",
+    "lat": 51.51,
+    "lon": 0.48,
+    "region": "North Sea"
+  },
+  {
+    "id": "GBLIV",
+    "name": "Liverpool",
+    "country": "UK",
+    "lat": 53.41,
+    "lon": -3.0,
+    "region": "Irish Sea"
+  },
+  {
+    "id": "GBSOU",
+    "name": "Southampton",
+    "country": "UK",
+    "lat": 50.9,
+    "lon": -1.4,
+    "region": "English Channel"
+  },
+  {
+    "id": "FRLEH",
+    "name": "Le Havre",
+    "country": "France",
+    "lat": 49.49,
+    "lon": 0.11,
+    "region": "English Channel"
+  },
+  {
+    "id": "FRMRS",
+    "name": "Marseille-Fos",
+    "country": "France",
+    "lat": 43.34,
+    "lon": 5.35,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ESBCN",
+    "name": "Barcelona",
+    "country": "Spain",
+    "lat": 41.35,
+    "lon": 2.17,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ESVLC",
+    "name": "Valencia",
+    "country": "Spain",
+    "lat": 39.45,
+    "lon": -0.32,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ESALG",
+    "name": "Algeciras",
+    "country": "Spain",
+    "lat": 36.13,
+    "lon": -5.44,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "PTLIS",
+    "name": "Lisbon",
+    "country": "Portugal",
+    "lat": 38.72,
+    "lon": -9.14,
+    "region": "Atlantic"
+  },
+  {
+    "id": "PTLEI",
+    "name": "Leixoes",
+    "country": "Portugal",
+    "lat": 41.18,
+    "lon": -8.7,
+    "region": "Atlantic"
+  },
+  {
+    "id": "ITGOA",
+    "name": "Genoa",
+    "country": "Italy",
+    "lat": 44.41,
+    "lon": 8.93,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ITTRS",
+    "name": "Trieste",
+    "country": "Italy",
+    "lat": 45.65,
+    "lon": 13.77,
+    "region": "Adriatic"
+  },
+  {
+    "id": "ITNAP",
+    "name": "Naples",
+    "country": "Italy",
+    "lat": 40.84,
+    "lon": 14.27,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ITLIV",
+    "name": "Livorno",
+    "country": "Italy",
+    "lat": 43.55,
+    "lon": 10.31,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "GRPIR",
+    "name": "Piraeus",
+    "country": "Greece",
+    "lat": 37.94,
+    "lon": 23.63,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "GRTHS",
+    "name": "Thessaloniki",
+    "country": "Greece",
+    "lat": 40.64,
+    "lon": 22.94,
+    "region": "Aegean"
+  },
+  {
+    "id": "TRIST",
+    "name": "Istanbul",
+    "country": "Turkey",
+    "lat": 41.01,
+    "lon": 28.98,
+    "region": "Black Sea"
+  },
+  {
+    "id": "TRMER",
+    "name": "Mersin",
+    "country": "Turkey",
+    "lat": 36.8,
+    "lon": 34.63,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "TRALI",
+    "name": "Aliaga",
+    "country": "Turkey",
+    "lat": 38.8,
+    "lon": 26.97,
+    "region": "Aegean"
+  },
+  {
+    "id": "MTMAR",
+    "name": "Marsaxlokk",
+    "country": "Malta",
+    "lat": 35.84,
+    "lon": 14.54,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "CYLMS",
+    "name": "Limassol",
+    "country": "Cyprus",
+    "lat": 34.67,
+    "lon": 33.04,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ILHFA",
+    "name": "Haifa",
+    "country": "Israel",
+    "lat": 32.82,
+    "lon": 34.99,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "EGALY",
+    "name": "Alexandria",
+    "country": "Egypt",
+    "lat": 31.2,
+    "lon": 29.92,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "EGPSD",
+    "name": "Port Said",
+    "country": "Egypt",
+    "lat": 31.26,
+    "lon": 32.3,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "EGSUZ",
+    "name": "Suez",
+    "country": "Egypt",
+    "lat": 29.97,
+    "lon": 32.55,
+    "region": "Red Sea"
+  },
+  {
+    "id": "MAAGA",
+    "name": "Agadir",
+    "country": "Morocco",
+    "lat": 30.42,
+    "lon": -9.6,
+    "region": "Atlantic"
+  },
+  {
+    "id": "MACAS",
+    "name": "Casablanca",
+    "country": "Morocco",
+    "lat": 33.6,
+    "lon": -7.62,
+    "region": "Atlantic"
+  },
+  {
+    "id": "TNTUN",
+    "name": "Tunis-Rades",
+    "country": "Tunisia",
+    "lat": 36.81,
+    "lon": 10.31,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "DZALG",
+    "name": "Algiers",
+    "country": "Algeria",
+    "lat": 36.77,
+    "lon": 3.06,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "DZORN",
+    "name": "Oran",
+    "country": "Algeria",
+    "lat": 35.7,
+    "lon": -0.64,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "MZMPT",
+    "name": "Maputo",
+    "country": "Mozambique",
+    "lat": -25.97,
+    "lon": 32.58,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "TZDAR",
+    "name": "Dar es Salaam",
+    "country": "Tanzania",
+    "lat": -6.79,
+    "lon": 39.28,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "KEKPA",
+    "name": "Mombasa",
+    "country": "Kenya",
+    "lat": -4.04,
+    "lon": 39.67,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "SADAR",
+    "name": "Port Sudan",
+    "country": "Sudan",
+    "lat": 19.62,
+    "lon": 37.22,
+    "region": "Red Sea"
+  },
+  {
+    "id": "ERMSW",
+    "name": "Massawa",
+    "country": "Eritrea",
+    "lat": 15.61,
+    "lon": 39.47,
+    "region": "Red Sea"
+  },
+  {
+    "id": "SOMOG",
+    "name": "Mogadishu",
+    "country": "Somalia",
+    "lat": 2.05,
+    "lon": 45.34,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "TZZAN",
+    "name": "Zanzibar",
+    "country": "Tanzania",
+    "lat": -6.16,
+    "lon": 39.19,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MZBEW",
+    "name": "Beira",
+    "country": "Mozambique",
+    "lat": -19.84,
+    "lon": 34.84,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MZNAC",
+    "name": "Nacala",
+    "country": "Mozambique",
+    "lat": -14.56,
+    "lon": 40.69,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "ZADUR",
+    "name": "Durban",
+    "country": "South Africa",
+    "lat": -29.87,
+    "lon": 31.05,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "ZACPT",
+    "name": "Cape Town",
+    "country": "South Africa",
+    "lat": -33.92,
+    "lon": 18.42,
+    "region": "Atlantic"
+  },
+  {
+    "id": "ZAPLZ",
+    "name": "Port Elizabeth (Gqeberha)",
+    "country": "South Africa",
+    "lat": -33.96,
+    "lon": 25.6,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "NAWVB",
+    "name": "Walvis Bay",
+    "country": "Namibia",
+    "lat": -22.96,
+    "lon": 14.51,
+    "region": "Atlantic"
+  },
+  {
+    "id": "AOLOB",
+    "name": "Luanda",
+    "country": "Angola",
+    "lat": -8.84,
+    "lon": 13.23,
+    "region": "Atlantic"
+  },
+  {
+    "id": "AOMOZ",
+    "name": "Namibe",
+    "country": "Angola",
+    "lat": -15.2,
+    "lon": 12.15,
+    "region": "Atlantic"
+  },
+  {
+    "id": "NGLOS",
+    "name": "Lagos",
+    "country": "Nigeria",
+    "lat": 6.45,
+    "lon": 3.4,
+    "region": "Atlantic"
+  },
+  {
+    "id": "NGTIN",
+    "name": "Tin Can Island",
+    "country": "Nigeria",
+    "lat": 6.43,
+    "lon": 3.36,
+    "region": "Atlantic"
+  },
+  {
+    "id": "GHTEM",
+    "name": "Tema",
+    "country": "Ghana",
+    "lat": 5.67,
+    "lon": 0.0,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CIABJ",
+    "name": "Abidjan",
+    "country": "Cote d'Ivoire",
+    "lat": 5.3,
+    "lon": -4.0,
+    "region": "Atlantic"
+  },
+  {
+    "id": "SNDAK",
+    "name": "Dakar",
+    "country": "Senegal",
+    "lat": 14.69,
+    "lon": -17.44,
+    "region": "Atlantic"
+  },
+  {
+    "id": "SLFNA",
+    "name": "Freetown",
+    "country": "Sierra Leone",
+    "lat": 8.49,
+    "lon": -13.23,
+    "region": "Atlantic"
+  },
+  {
+    "id": "GMLBV",
+    "name": "Monrovia",
+    "country": "Liberia",
+    "lat": 6.31,
+    "lon": -10.8,
+    "region": "Atlantic"
+  },
+  {
+    "id": "KHGOM",
+    "name": "Port Sudan",
+    "country": "Sudan",
+    "lat": 19.61,
+    "lon": 37.22,
+    "region": "Red Sea"
+  },
+  {
+    "id": "RUMOW",
+    "name": "Murmansk",
+    "country": "Russia",
+    "lat": 68.97,
+    "lon": 33.08,
+    "region": "Arctic"
+  },
+  {
+    "id": "NOOSL",
+    "name": "Oslo",
+    "country": "Norway",
+    "lat": 59.91,
+    "lon": 10.75,
+    "region": "North Sea"
+  },
+  {
+    "id": "NOOES",
+    "name": "Alesund",
+    "country": "Norway",
+    "lat": 62.47,
+    "lon": 6.15,
+    "region": "North Atlantic"
+  },
+  {
+    "id": "SESTO",
+    "name": "Stockholm",
+    "country": "Sweden",
+    "lat": 59.33,
+    "lon": 18.07,
+    "region": "Baltic"
+  },
+  {
+    "id": "DKCPH",
+    "name": "Copenhagen",
+    "country": "Denmark",
+    "lat": 55.68,
+    "lon": 12.59,
+    "region": "Baltic"
+  },
+  {
+    "id": "PLGDN",
+    "name": "Gdansk",
+    "country": "Poland",
+    "lat": 54.35,
+    "lon": 18.65,
+    "region": "Baltic"
+  },
+  {
+    "id": "FIRAO",
+    "name": "Rauma",
+    "country": "Finland",
+    "lat": 61.13,
+    "lon": 21.51,
+    "region": "Baltic"
+  },
+  {
+    "id": "LVVNT",
+    "name": "Ventspils",
+    "country": "Latvia",
+    "lat": 57.39,
+    "lon": 21.56,
+    "region": "Baltic"
+  },
+  {
+    "id": "LTKLJ",
+    "name": "Klaipeda",
+    "country": "Lithuania",
+    "lat": 55.71,
+    "lon": 21.13,
+    "region": "Baltic"
+  },
+  {
+    "id": "ROCND",
+    "name": "Constanta",
+    "country": "Romania",
+    "lat": 44.17,
+    "lon": 28.65,
+    "region": "Black Sea"
+  },
+  {
+    "id": "BGVAR",
+    "name": "Varna",
+    "country": "Bulgaria",
+    "lat": 43.21,
+    "lon": 27.91,
+    "region": "Black Sea"
+  },
+  {
+    "id": "GEPTI",
+    "name": "Poti",
+    "country": "Georgia",
+    "lat": 42.15,
+    "lon": 41.67,
+    "region": "Black Sea"
+  },
+  {
+    "id": "UAODS",
+    "name": "Odesa",
+    "country": "Ukraine",
+    "lat": 46.48,
+    "lon": 30.73,
+    "region": "Black Sea"
+  },
+  {
+    "id": "KZAKT",
+    "name": "Aktau",
+    "country": "Kazakhstan",
+    "lat": 43.65,
+    "lon": 51.17,
+    "region": "Caspian Sea"
+  },
+  {
+    "id": "AZBAK",
+    "name": "Baku",
+    "country": "Azerbaijan",
+    "lat": 40.37,
+    "lon": 49.84,
+    "region": "Caspian Sea"
+  },
+  {
+    "id": "IRBND",
+    "name": "Bandar Abbas",
+    "country": "Iran",
+    "lat": 27.18,
+    "lon": 56.27,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "IRBHQ",
+    "name": "Bandar Imam Khomeini",
+    "country": "Iran",
+    "lat": 30.43,
+    "lon": 49.08,
+    "region": "Persian Gulf"
+  },
+  {
+    "id": "IRQAB",
+    "name": "Umm Qasr",
+    "country": "Iraq",
+    "lat": 30.04,
+    "lon": 47.93,
+    "region": "Persian Gulf"
+  },
+  {
+    "id": "KWKWI",
+    "name": "Shuwaikh",
+    "country": "Kuwait",
+    "lat": 29.35,
+    "lon": 47.93,
+    "region": "Persian Gulf"
+  },
+  {
+    "id": "BHMAN",
+    "name": "Khalifa Bin Salman",
+    "country": "Bahrain",
+    "lat": 26.18,
+    "lon": 50.65,
+    "region": "Arabian Gulf"
+  },
+  {
+    "id": "ISREY",
+    "name": "Reykjavik",
+    "country": "Iceland",
+    "lat": 64.15,
+    "lon": -21.94,
+    "region": "North Atlantic"
+  },
+  {
+    "id": "IEDUB",
+    "name": "Dublin",
+    "country": "Ireland",
+    "lat": 53.35,
+    "lon": -6.23,
+    "region": "Irish Sea"
+  },
+  {
+    "id": "IESHN",
+    "name": "Shannon Foynes",
+    "country": "Ireland",
+    "lat": 52.61,
+    "lon": -9.06,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CHBSL",
+    "name": "Basel",
+    "country": "Switzerland",
+    "lat": 47.56,
+    "lon": 7.59,
+    "region": "Rhine"
+  },
+  {
+    "id": "HRRJK",
+    "name": "Rijeka",
+    "country": "Croatia",
+    "lat": 45.33,
+    "lon": 14.44,
+    "region": "Adriatic"
+  },
+  {
+    "id": "SIKOP",
+    "name": "Koper",
+    "country": "Slovenia",
+    "lat": 45.55,
+    "lon": 13.73,
+    "region": "Adriatic"
+  },
+  {
+    "id": "MEBAR",
+    "name": "Bar",
+    "country": "Montenegro",
+    "lat": 42.1,
+    "lon": 19.1,
+    "region": "Adriatic"
+  },
+  {
+    "id": "ALDRR",
+    "name": "Durres",
+    "country": "Albania",
+    "lat": 41.32,
+    "lon": 19.45,
+    "region": "Adriatic"
+  },
+  {
+    "id": "CYLAR",
+    "name": "Larnaca",
+    "country": "Cyprus",
+    "lat": 34.92,
+    "lon": 33.63,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "MAKSI",
+    "name": "Tangier Med",
+    "country": "Morocco",
+    "lat": 35.89,
+    "lon": -5.51,
+    "region": "Mediterranean"
+  },
+  {
+    "id": "ESVGO",
+    "name": "Vigo",
+    "country": "Spain",
+    "lat": 42.24,
+    "lon": -8.72,
+    "region": "Atlantic"
+  },
+  {
+    "id": "ESBIO",
+    "name": "Bilbao",
+    "country": "Spain",
+    "lat": 43.34,
+    "lon": -3.02,
+    "region": "Bay of Biscay"
+  },
+  {
+    "id": "FRNTE",
+    "name": "Nantes Saint-Nazaire",
+    "country": "France",
+    "lat": 47.28,
+    "lon": -2.2,
+    "region": "Atlantic"
+  },
+  {
+    "id": "FRDUN",
+    "name": "Dunkirk",
+    "country": "France",
+    "lat": 51.03,
+    "lon": 2.37,
+    "region": "North Sea"
+  },
+  {
+    "id": "BEZEE",
+    "name": "Zeebrugge",
+    "country": "Belgium",
+    "lat": 51.33,
+    "lon": 3.2,
+    "region": "North Sea"
+  },
+  {
+    "id": "NLRDM",
+    "name": "Amsterdam",
+    "country": "Netherlands",
+    "lat": 52.38,
+    "lon": 4.9,
+    "region": "North Sea"
+  },
+  {
+    "id": "DEWVN",
+    "name": "Wilhelmshaven",
+    "country": "Germany",
+    "lat": 53.52,
+    "lon": 8.14,
+    "region": "North Sea"
+  },
+  {
+    "id": "GBLPL",
+    "name": "London Gateway",
+    "country": "UK",
+    "lat": 51.51,
+    "lon": 0.48,
+    "region": "North Sea"
+  },
+  {
+    "id": "GBBEL",
+    "name": "Belfast",
+    "country": "UK",
+    "lat": 54.6,
+    "lon": -5.93,
+    "region": "Irish Sea"
+  },
+  {
+    "id": "ISAFJ",
+    "name": "Akureyri",
+    "country": "Iceland",
+    "lat": 65.68,
+    "lon": -18.1,
+    "region": "North Atlantic"
+  },
+  {
+    "id": "CVMIN",
+    "name": "Mindelo",
+    "country": "Cabo Verde",
+    "lat": 16.89,
+    "lon": -25.0,
+    "region": "Atlantic"
+  },
+  {
+    "id": "GQMLB",
+    "name": "Malabo",
+    "country": "Equatorial Guinea",
+    "lat": 3.75,
+    "lon": 8.78,
+    "region": "Gulf of Guinea"
+  },
+  {
+    "id": "CMKBI",
+    "name": "Kribi",
+    "country": "Cameroon",
+    "lat": 2.94,
+    "lon": 9.91,
+    "region": "Gulf of Guinea"
+  },
+  {
+    "id": "GAPLB",
+    "name": "Port-Gentil",
+    "country": "Gabon",
+    "lat": -0.72,
+    "lon": 8.78,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CDMAT",
+    "name": "Matadi",
+    "country": "DR Congo",
+    "lat": -5.82,
+    "lon": 13.46,
+    "region": "Congo River"
+  },
+  {
+    "id": "MAMOR",
+    "name": "Mogadishu",
+    "country": "Somalia",
+    "lat": 2.05,
+    "lon": 45.34,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "YEMOK",
+    "name": "Mukalla",
+    "country": "Yemen",
+    "lat": 14.54,
+    "lon": 49.12,
+    "region": "Arabian Sea"
+  },
+  {
+    "id": "SYCYC",
+    "name": "Victoria",
+    "country": "Seychelles",
+    "lat": -4.62,
+    "lon": 55.45,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MUPLU",
+    "name": "Port Louis",
+    "country": "Mauritius",
+    "lat": -20.16,
+    "lon": 57.5,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "REPOR",
+    "name": "Port Reunion",
+    "country": "Reunion",
+    "lat": -20.94,
+    "lon": 55.29,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MGTOA",
+    "name": "Toamasina",
+    "country": "Madagascar",
+    "lat": -18.15,
+    "lon": 49.4,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "MZNAC2",
+    "name": "Nacala",
+    "country": "Mozambique",
+    "lat": -14.56,
+    "lon": 40.69,
+    "region": "Indian Ocean"
+  },
+  {
+    "id": "BRITA",
+    "name": "Itajai",
+    "country": "Brazil",
+    "lat": -26.91,
+    "lon": -48.66,
+    "region": "Atlantic"
+  },
+  {
+    "id": "BRPAR",
+    "name": "Paranagua",
+    "country": "Brazil",
+    "lat": -25.52,
+    "lon": -48.51,
+    "region": "Atlantic"
+  },
+  {
+    "id": "ARROS",
+    "name": "Rosario",
+    "country": "Argentina",
+    "lat": -32.95,
+    "lon": -60.67,
+    "region": "Parana River"
+  },
+  {
+    "id": "ARBAH",
+    "name": "Bahia Blanca",
+    "country": "Argentina",
+    "lat": -38.72,
+    "lon": -62.27,
+    "region": "Atlantic"
+  },
+  {
+    "id": "CLTAL",
+    "name": "Talcahuano",
+    "country": "Chile",
+    "lat": -36.72,
+    "lon": -73.12,
+    "region": "Pacific"
+  },
+  {
+    "id": "PEPAI",
+    "name": "Paita",
+    "country": "Peru",
+    "lat": -5.09,
+    "lon": -81.11,
+    "region": "Pacific"
+  },
+  {
+    "id": "ECMTA",
+    "name": "Manta",
+    "country": "Ecuador",
+    "lat": -0.95,
+    "lon": -80.73,
+    "region": "Pacific"
+  },
+  {
+    "id": "MXTAM",
+    "name": "Tampico",
+    "country": "Mexico",
+    "lat": 22.25,
+    "lon": -97.87,
+    "region": "Gulf of Mexico"
+  },
+  {
+    "id": "MXMAN",
+    "name": "Lazaro Cardenas",
+    "country": "Mexico",
+    "lat": 17.92,
+    "lon": -102.18,
+    "region": "Pacific"
+  },
+  {
+    "id": "CUNAS",
+    "name": "Nassau",
+    "country": "Bahamas",
+    "lat": 25.08,
+    "lon": -77.35,
+    "region": "Atlantic"
+  },
+  {
+    "id": "HTPAP",
+    "name": "Port-au-Prince",
+    "country": "Haiti",
+    "lat": 18.54,
+    "lon": -72.34,
+    "region": "Caribbean"
+  },
+  {
+    "id": "CUSHV",
+    "name": "Havana",
+    "country": "Cuba",
+    "lat": 23.11,
+    "lon": -82.37,
+    "region": "Caribbean"
+  },
+  {
+    "id": "PRSAN",
+    "name": "San Juan",
+    "country": "Puerto Rico",
+    "lat": 18.47,
+    "lon": -66.11,
+    "region": "Caribbean"
+  },
+  {
+    "id": "BZMHA",
+    "name": "Belize City",
+    "country": "Belize",
+    "lat": 17.5,
+    "lon": -88.2,
+    "region": "Caribbean"
+  },
+  {
+    "id": "GTSTC",
+    "name": "Puerto Barrios",
+    "country": "Guatemala",
+    "lat": 15.73,
+    "lon": -88.59,
+    "region": "Caribbean"
+  },
+  {
+    "id": "HNLCE",
+    "name": "Puerto Cortes",
+    "country": "Honduras",
+    "lat": 15.83,
+    "lon": -87.93,
+    "region": "Caribbean"
+  },
+  {
+    "id": "CRCAL",
+    "name": "Caldera",
+    "country": "Costa Rica",
+    "lat": 9.91,
+    "lon": -84.72,
+    "region": "Pacific"
+  },
+  {
+    "id": "NIQUE",
+    "name": "Corinto",
+    "country": "Nicaragua",
+    "lat": 12.48,
+    "lon": -87.17,
+    "region": "Pacific"
+  },
+  {
+    "id": "SVACA",
+    "name": "Acajutla",
+    "country": "El Salvador",
+    "lat": 13.59,
+    "lon": -89.84,
+    "region": "Pacific"
+  },
+  {
+    "id": "HTCAP",
+    "name": "Cap-Haitien",
+    "country": "Haiti",
+    "lat": 19.76,
+    "lon": -72.2,
+    "region": "Caribbean"
+  },
+  {
+    "id": "PAPTY2",
+    "name": "Colon",
+    "country": "Panama",
+    "lat": 9.36,
+    "lon": -79.9,
+    "region": "Caribbean"
+  }
+]

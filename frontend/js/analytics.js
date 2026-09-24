@@ -1,0 +1,6 @@
+const API=`${location.protocol}//${location.hostname}:8000`;
+const $=id=>document.getElementById(id);
+async function get(path){const response=await fetch(API+path);if(!response.ok)throw Error(await response.text());return response.json()}
+async function load(){try{const data=await get('/api/simulation/analytics');const training=data.training||{};$('trained').textContent=training.trained?'TRAINED':'UNTRAINED';$('device').textContent=training.gpu_name&&training.gpu_name!=='CPU'?training.gpu_name:'CPU';$('episodes').textContent=training.episodes||0;$('ports').textContent=data.ports||279;$('report').textContent=JSON.stringify(training,null,2)}catch(error){console.error(error);$('report').textContent='Backend unavailable'}}
+$('trainBtn').onclick=async()=>{const button=$('trainBtn');button.disabled=true;button.textContent='TRAINING…';try{const response=await fetch(API+'/api/simulation/train',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({steps:20000,envs:64,rollout:128,learning_rate:.0003})});if(!response.ok)throw Error(await response.text());await load();button.textContent='TRAIN AGAIN'}catch(error){button.textContent='TRAINING ERROR';console.error(error)}finally{button.disabled=false}};
+load();setInterval(load,5000);
