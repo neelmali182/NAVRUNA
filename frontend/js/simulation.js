@@ -1,4 +1,6 @@
-const API=`${location.protocol}//${location.hostname}:8000`;
+// Same-origin in production (the API serves this folder). The local launcher runs
+// the UI on :8080 and the API on :8000, so point at :8000 when the ports differ.
+const API=(location.port&&location.port!=='8000')?`${location.protocol}//${location.hostname}:8000`:'';
 const state={vessels:[],entities:new Map(),motion:new Map(),ports:[],portEntities:[],land:null,running:false,timer:null,stepInFlight:false,tickCount:0,selected:null,cinema:false,speed:1,weatherVisible:false,weatherField:[],weatherLayer:'waves',weatherParticles:[],weatherFrame:null,weatherProjectionDirty:true,weatherTime:0,weatherLastFetch:0};
 const $=id=>document.getElementById(id);
 const viewer=new Cesium.Viewer('globe',{animation:false,timeline:false,baseLayerPicker:false,fullscreenButton:false,geocoder:false,homeButton:false,infoBox:false,navigationHelpButton:false,sceneModePicker:false,selectionIndicator:false,terrainProvider:new Cesium.EllipsoidTerrainProvider(),imageryProvider:new Cesium.OpenStreetMapImageryProvider({url:'https://tile.openstreetmap.org/'})});

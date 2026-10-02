@@ -92,14 +92,15 @@ def test_training_submission_is_reserved_before_worker_starts(monkeypatch):
         def submit(self, *args):
             return FakeFuture()
 
-    previous_status = simulation_router.TRAINER.training_status
-    monkeypatch.setattr(simulation_router, 'TRAIN_POOL', FakePool())
-    simulation_router.TRAINER.training_status = 'idle'
+    trainer = simulation_router.get_trainer()
+    previous_status = trainer.training_status
+    monkeypatch.setattr(simulation_router, 'get_train_pool', lambda: FakePool())
+    trainer.training_status = 'idle'
     request = simulation_router.TrainRequest(steps=1024, envs=8, rollout=32, continuous=False)
     try:
         first = asyncio.run(simulation_router.train_simulation(request))
         second = asyncio.run(simulation_router.train_simulation(request))
     finally:
-        simulation_router.TRAINER.training_status = previous_status
+        trainer.training_status = previous_status
     assert first['accepted'] is True
     assert second == {'accepted': False, 'status': 'training', 'message': 'A training run is already active.'}

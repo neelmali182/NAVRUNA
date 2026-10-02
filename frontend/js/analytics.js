@@ -1,4 +1,6 @@
-const API=`${location.protocol}//${location.hostname}:8000`;
+// Same-origin in production (the API serves this folder). The local launcher runs
+// the UI on :8080 and the API on :8000, so point at :8000 when the ports differ.
+const API=(location.port&&location.port!=='8000')?`${location.protocol}//${location.hostname}:8000`:'';
 const $=id=>document.getElementById(id);
 async function get(path){const response=await fetch(API+path);if(!response.ok)throw Error(await response.text());return response.json()}
 async function load(){try{const data=await get('/api/simulation/analytics');const training=data.training||{};$('trained').textContent=training.trained?'TRAINED':'UNTRAINED';$('device').textContent=training.gpu_name&&training.gpu_name!=='CPU'?training.gpu_name:'CPU';$('episodes').textContent=training.episodes||0;$('ports').textContent=data.ports||279;$('report').textContent=JSON.stringify(training,null,2)}catch(error){console.error(error);$('report').textContent='Backend unavailable'}}

@@ -18,20 +18,63 @@ from model.navigation.geodata import load_ports
 
 router = APIRouter(prefix="/api/simulation", tags=["offline-simulation"])
 
-TRAINER = PPOTrainer(seed=20260922)
-SIM = FleetSimulator(seed=20260922, trainer=TRAINER)
-TRAIN_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="navruna-trainer")
-WEATHER = WeatherSimulator(seed=20260922)
+# Heavy objects are built on first use rather than at import. Constructing them
+# here would import torch and rasterize the global coastline before the server can
+# bind its port, which reads as "the app never started" to a deploy health probe.
 SIM_LOCK = RLock()
 TRAIN_SUBMIT_LOCK = RLock()
+_INIT_LOCK = RLock()
+
+_TRAINER: Optional[PPOTrainer] = None
+_SIM: Optional[FleetSimulator] = None
+_WEATHER: Optional[WeatherSimulator] = None
+_TRAIN_POOL: Optional[ThreadPoolExecutor] = None
+
+
+def get_trainer() -> PPOTrainer:
+    global _TRAINER
+    if _TRAINER is None:
+        with _INIT_LOCK:
+            if _TRAINER is None:
+                _TRAINER = PPOTrainer(seed=20260922)
+    return _TRAINER
+
+
+def get_sim() -> FleetSimulator:
+    global _SIM
+    if _SIM is None:
+        with _INIT_LOCK:
+            if _SIM is None:
+                _SIM = FleetSimulator(seed=20260922, trainer=get_trainer())
+    return _SIM
+
+
+def get_weather() -> WeatherSimulator:
+    global _WEATHER
+    if _WEATHER is None:
+        with _INIT_LOCK:
+            if _WEATHER is None:
+                _WEATHER = WeatherSimulator(seed=20260922)
+    return _WEATHER
+
+
+def get_train_pool() -> ThreadPoolExecutor:
+    global _TRAIN_POOL
+    if _TRAIN_POOL is None:
+        with _INIT_LOCK:
+            if _TRAIN_POOL is None:
+                _TRAIN_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="navruna-trainer")
+    return _TRAIN_POOL
+
 
 def _run_training(*args):
+    trainer = get_trainer()
     try:
-        return TRAINER.train(*args)
+        return trainer.train(*args)
     except Exception as exc:
-        TRAINER.training_status = "error"
-        TRAINER.last_report = {**TRAINER.last_report, "error": str(exc)}
-        TRAINER._log('training_error',f'Training failed: {exc}')
+        trainer.training_status = "error"
+        trainer.last_report = {**trainer.last_report, "error": str(exc)}
+        trainer._log('training_error',f'Training failed: {exc}')
         raise
 
 
@@ -54,13 +97,13 @@ class TrainRequest(BaseModel):
 
 @router.post("/start")
 async def start_simulation(req: StartRequest) -> Dict[str, Any]:
-    global SIM
+    global _SIM
     seed = req.seed if req.seed is not None else int(time.time()) % 2_000_000_000
     def create_fleet():
-        global SIM
+        global _SIM
         with SIM_LOCK:
-            SIM = FleetSimulator(seed=seed, trainer=TRAINER)
-            return SIM.generate_fleet(req.vessel_count)
+            _SIM = FleetSimulator(seed=seed, trainer=get_trainer())
+            return _SIM.generate_fleet(req.vessel_count)
     return await asyncio.to_thread(create_fleet)
 
 
@@ -71,28 +114,30 @@ async def step_simulation(req: StepRequest) -> Dict[str, Any]:
 
 def _step_simulation(hours: float) -> Dict[str, Any]:
     with SIM_LOCK:
-        return SIM.step(hours)
+        return get_sim().step(hours)
 
 
 @router.post("/train")
 async def train_simulation(req: TrainRequest) -> Dict[str, Any]:
+    trainer = get_trainer()
     with TRAIN_SUBMIT_LOCK:
-        if TRAINER.training_status in ('starting', 'training'):
+        if trainer.training_status in ('starting', 'training'):
             return {"accepted": False, "status": "training", "message": "A training run is already active."}
-        TRAINER.training_status = 'starting'
+        trainer.training_status = 'starting'
         try:
-            future = TRAIN_POOL.submit(_run_training, req.steps, req.envs, req.rollout, req.learning_rate, req.continuous)
+            future = get_train_pool().submit(_run_training, req.steps, req.envs, req.rollout, req.learning_rate, req.continuous)
         except Exception:
-            TRAINER.training_status = 'error'
+            trainer.training_status = 'error'
             raise
     return {"accepted": True, "status": "training", "requested_steps": req.steps, "future": id(future)}
 
 
 @router.post("/train/stop")
 async def stop_training() -> Dict[str, Any]:
-    if TRAINER.training_status not in ('starting', 'training'):
-        return {"accepted": False, "status": TRAINER.training_status, "message": "No training run is active."}
-    TRAINER.request_stop()
+    trainer = get_trainer()
+    if trainer.training_status not in ('starting', 'training'):
+        return {"accepted": False, "status": trainer.training_status, "message": "No training run is active."}
+    trainer.request_stop()
     return {"accepted": True, "status": "stopping", "message": "Training will stop after the current PPO update."}
 
 
@@ -103,13 +148,13 @@ async def simulation_state() -> Dict[str, Any]:
 
 def _simulation_state() -> Dict[str, Any]:
     with SIM_LOCK:
-        return SIM.snapshot(include_routes=False)
+        return get_sim().snapshot(include_routes=False)
 
 
 @router.get("/analytics")
 async def simulation_analytics() -> Dict[str, Any]:
     with SIM_LOCK:
-        return {**SIM.analytics(), "training": TRAINER.analytics(), "ports": len(load_ports())}
+        return {**get_sim().analytics(), "training": get_trainer().analytics(), "ports": len(load_ports())}
 
 
 @router.get("/ports")
@@ -119,11 +164,11 @@ async def ports() -> Dict[str, Any]:
 
 @router.get("/policy")
 async def policy() -> Dict[str, Any]:
-    return TRAINER.analytics()
+    return get_trainer().analytics()
 
 @router.get("/training")
 async def training() -> Dict[str, Any]:
-    return TRAINER.training_view()
+    return get_trainer().training_view()
 
 @router.get("/weather")
 async def weather(hours: float = 0.0, lat_step: float = 8.0, lon_step: float = 10.0) -> Dict[str, Any]:
@@ -132,7 +177,7 @@ async def weather(hours: float = 0.0, lat_step: float = 8.0, lon_step: float = 1
     This endpoint is independent of fleet generation, so the visualizer works
     immediately after startup even when no vessels have been generated.
     """
-    field = WEATHER.field(hours, lat_step=max(2.0, min(20.0, lat_step)), lon_step=max(2.0, min(20.0, lon_step)))
+    field = get_weather().field(hours, lat_step=max(2.0, min(20.0, lat_step)), lon_step=max(2.0, min(20.0, lon_step)))
     return {"ok": True, "hours": hours, "count": len(field), "field": field}
 
 
@@ -143,5 +188,6 @@ async def reset_simulation() -> Dict[str, Any]:
 
 def _reset_simulation() -> Dict[str, Any]:
     with SIM_LOCK:
-        SIM.reset()
-        return SIM.snapshot(include_routes=False)
+        sim = get_sim()
+        sim.reset()
+        return sim.snapshot(include_routes=False)
