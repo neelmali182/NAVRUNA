@@ -34,7 +34,7 @@ class GlobalGeography:
         self.land = unary_union([shape(f["geometry"]) for f in raw["features"]])
         self.prepared = prep(self.land)
         self.grid_step = float(grid_step)
-        self._port_cache: dict[str, tuple[float, float]] = {}
+        self._port_cache: dict[tuple[str, float], tuple[float, float]] = {}
         self._build_grid()
 
     @staticmethod
@@ -85,14 +85,34 @@ class GlobalGeography:
         lat1,lon1=a; lat2,lon2=b
         dl=((lon2-lon1+180)%360)-180
         span_km=math.hypot((lat2-lat1)*111.32,dl*111.32*max(.18,math.cos(math.radians((lat1+lat2)/2))))
-        n=samples or max(12,int(span_km/8))
-        for i in range(1,n+1):
-            t=i/n; lat=lat1+(lat2-lat1)*t; lon=self.norm_lon(lon1+dl*t)
-            if self.on_land(lat,lon) or self.distance_to_land_km(lat,lon)<safety_km: return True
+        # Triangle-inequality prefilter: if starting clearance exceeds segment length + safety buffer,
+        # it is geometrically impossible for the segment to reach within safety_km of land.
+        if self.distance_to_land_km(lat1,lon1) > (span_km + safety_km + 15.0):
+            return False
+        # Keep samples spaced to resolve features without redundant sub-kilometer queries.
+        step_spacing = min(3.5, max(1.0, safety_km * 0.7)) if safety_km > 0 else 3.5
+        n = samples or max(1, math.ceil(span_km / step_spacing))
+        for i in range(1, n + 1):
+            t = i / n; lat = lat1 + (lat2 - lat1) * t; lon = self.norm_lon(lon1 + dl * t)
+            if self.on_land_fast(lat, lon):
+                return True
+            if safety_km <= 0:
+                if self.distance_to_land_km(lat, lon) > 10.0:
+                    continue
+                if self.on_land(lat, lon):
+                    return True
+            else:
+                grid_dist = self.distance_to_land_km(lat, lon)
+                if grid_dist < max(0.0, safety_km - 2.5):
+                    return True
+                if grid_dist > safety_km + 10.0:
+                    continue
+                if self.on_land(lat, lon) or self.vector_distance_to_land_km(lat, lon) < safety_km:
+                    return True
         return False
 
     def offshore_point(self, port: dict, safety_km: float = 8.0):
-        key=port['id']
+        key=(port['id'],float(safety_km))
         if key in self._port_cache: return self._port_cache[key]
         lat0,lon0=port['lat'],port['lon']
         for radius in (5,10,20,35,50,75,100):

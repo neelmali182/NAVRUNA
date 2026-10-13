@@ -1,7 +1,15 @@
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $root
-Write-Host "NAVRUNA v4.1.2 - Offline Maritime AI Simulation Lab" -ForegroundColor Cyan
+$version = if (Test-Path (Join-Path $root "VERSION")) { (Get-Content (Join-Path $root "VERSION") -Raw).Trim() } else { "5.0.0" }
+Write-Host "NAVRUNA v$version - Autonomous AI Fleet Navigation Platform" -ForegroundColor Cyan
+
+$envFile = Join-Path $root ".env"
+$envExample = Join-Path $root ".env.example"
+if (-not (Test-Path $envFile) -and (Test-Path $envExample)) {
+    Copy-Item $envExample $envFile
+    Write-Host "Created .env from .env.example" -ForegroundColor Green
+}
 
 function Test-Python($exe) {
     try {
@@ -135,6 +143,7 @@ Wait-ForHttp "http://127.0.0.1:8080/" "Frontend"
 Write-Host "NAVRUNA: http://127.0.0.1:8080/" -ForegroundColor Green
 Write-Host "API docs: http://127.0.0.1:8000/docs" -ForegroundColor Green
 Write-Host "Weather API: http://127.0.0.1:8000/api/simulation/weather?hours=0" -ForegroundColor Green
-Write-Host "Simulation data: offline / synthetic" -ForegroundColor Green
+Write-Host "Simulation inputs: local / synthetic" -ForegroundColor Green
+Write-Host "Browser map assets: online providers required" -ForegroundColor Yellow
 
 Start-Process "http://127.0.0.1:8080/"

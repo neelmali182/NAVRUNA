@@ -1,86 +1,285 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NAVRUNA — Offline Maritime AI Lab</title>
-<link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css">
-<link rel="stylesheet" href="css/styles.css?v=203">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NAVRUNA — Autonomous AI Maritime Fleet Navigation System</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css">
+  <link rel="stylesheet" href="css/styles.css?v=500">
 </head>
 <body>
-<div id="globe"></div><canvas id="weatherCanvas"></canvas>
-<div id="weatherHud" class="weather-hud" hidden>
-  <div class="weather-hud-head"><div><b>OCEAN WEATHER</b><span id="weatherLayerTitle">WAVES</span></div><button id="weatherClose">×</button></div>
-  <div class="weather-tabs">
-    <button data-weather-layer="waves" class="active">WAVES</button>
-    <button data-weather-layer="wind">WIND</button>
-    <button data-weather-layer="current">CURRENT</button>
-    <button data-weather-layer="storm">STORMS</button>
-  </div>
-  <div class="weather-scale"><div class="scale-bar"></div><div class="scale-labels"><span id="weatherMin">0.5 m</span><span id="weatherMax">9 m</span></div></div>
-  <div class="weather-readout"><span id="weatherReadout">Move over the ocean</span><span id="weatherClock">T+00h</span></div>
-</div>
-<div class="vignette"></div>
+  <!-- 3D Cesium Ocean Surface & Dynamic Weather Layer -->
+  <div id="globe" role="application" aria-label="Interactive maritime globe"></div>
+  <canvas id="weatherCanvas" aria-hidden="true"></canvas>
 
-<header class="topbar glass">
-  <div class="brand"><div class="brand-main">NAV<span>RUNA</span></div><div class="brand-sub">OFFLINE MARITIME AI SIMULATION LAB · RL NAVIGATION</div></div>
-  <div class="top-actions">
-    <div class="pill"><i id="statusDot"></i><span id="statusText">SIMULATION READY</span></div>
-    <div class="pill" id="gpuPill">AI · CPU</div>
-    <button class="icon-btn" id="weatherToggle" title="Toggle weather visualizer">WEATHER</button><button class="icon-btn" id="resetViewBtn" title="Reset globe position to north up">NORTH UP</button><a class="icon-btn" href="training.html">AI TRAINING</a><button class="icon-btn" id="cinemaBtn" title="Cinematic mode">◈</button>
-    <button class="icon-btn" id="leftToggle">☰</button>
-    <button class="icon-btn" id="rightToggle">◫</button>
-  </div>
-</header>
+  <!-- Weather Overlay HUD Controller -->
+  <section id="weatherHud" class="weather-hud" aria-label="Synthetic ocean weather layers" hidden>
+    <div class="weather-hud-head">
+      <div>
+        <b>OCEAN ATMOSPHERE · SYNTHETIC</b>
+        <span id="weatherLayerTitle">WAVES</span>
+      </div>
+      <button id="weatherClose" class="mini-btn" aria-label="Close weather controls">✕</button>
+    </div>
+    <div class="weather-tabs" role="group" aria-label="Weather layer">
+      <button type="button" data-weather-layer="waves" class="active" aria-pressed="true">🌊 WAVES</button>
+      <button type="button" data-weather-layer="wind" aria-pressed="false">💨 WIND</button>
+      <button type="button" data-weather-layer="current" aria-pressed="false">🧭 CURRENT</button>
+      <button type="button" data-weather-layer="storm" aria-pressed="false">⚡ STORMS</button>
+    </div>
+    <div class="weather-scale" aria-label="Weather layer scale">
+      <div class="scale-bar"></div>
+      <div class="scale-labels">
+        <span id="weatherMin">1.3 m</span>
+        <span id="weatherMax">5.9 m</span>
+      </div>
+    </div>
+    <div class="weather-readout" role="status" aria-live="polite">
+      <span id="weatherReadout">Move over the ocean to inspect the field</span>
+      <span id="weatherClock">T+0.0 h</span>
+    </div>
+    <div class="weather-tools">
+      <label for="weatherOpacity">Overlay Opacity <input id="weatherOpacity" type="range" min="25" max="100" step="5" value="75"></label>
+      <label for="weatherParticlesToggle"><input id="weatherParticlesToggle" type="checkbox" checked> Flow Particles</label>
+    </div>
+  </section>
 
-<aside id="leftPanel" class="side-panel left glass">
-  <div class="panel-head"><div><small>MISSION CONTROL</small><h2>Fleet simulator</h2></div><button class="mini-btn" id="collapseLeft">×</button></div>
-  <label>VESSELS <b id="vesselCountValue">60</b></label>
-  <input id="vesselCount" type="range" min="10" max="300" step="10" value="60">
-  <div class="button-grid"><button class="primary" id="startBtn">START SIMULATION</button><button class="secondary" id="stepBtn">STEP +6H</button></div>
-  <button class="run" id="playBtn" hidden>■ STOP SIMULATION</button>
-  <div class="speed-control"><label for="simulationSpeed">SIMULATION SPEED</label><select id="simulationSpeed"><option value="1">1×</option><option value="2">2×</option><option value="5">5×</option><option value="10">10×</option><option value="50">50×</option></select></div>
+  <!-- Cinematic Vignette -->
+  <div class="vignette"></div>
 
-  <div class="divider"></div>
-  <small>REINFORCEMENT LEARNING</small>
-  <div class="ai-card"><div class="ai-row"><span>POLICY</span><b id="policyState">UNTRAINED</b></div><div class="ai-row"><span>DEVICE</span><b id="policyDevice">CPU</b></div><div class="ai-row"><span>ALGORITHM</span><b>PPO</b></div><div class="ai-row"><span>CONSTRAINT</span><b>LAND SAFE</b></div></div>
-  <label>TRAINING TARGET <b id="trainStepsValue">20K</b></label><div class="hint">PPO environment transitions per update target. 20K = 20,000 steps; continuous training keeps running until Stop.</div>
-  <input id="trainSteps" type="range" min="2000" max="100000" step="2000" value="20000">
-  <a class="ghost full nav-link" href="training.html">OPEN TRAINING LAB →</a>
-  <div class="hint">Ships choose heading actions from local observations. No route polyline is supplied to the policy.</div>
+  <!-- Top Navigation & Global Fleet Status Bar -->
+  <header class="topbar glass">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" stroke="#38bdf8" stroke-width="1.5"/>
+          <polygon points="12 4 17 18 12 15 7 18" fill="url(#brandGrad)" stroke="none"/>
+          <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+          <defs>
+            <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f2fe"/>
+              <stop offset="100%" stop-color="#05ffa1"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-main">NAV<span>RUNA</span></div>
+        <div class="brand-sub">AI FLEET NAVIGATION PLATFORM · v5.0</div>
+      </div>
+    </div>
 
-  <div class="divider"></div>
-  <small>WEATHER SIMULATION</small><div class="ai-card"><div class="ai-row"><span>FIELD</span><b id="weatherMode">PROCEDURAL OFFLINE</b></div><div class="ai-row"><span>VISUALIZER</span><b id="weatherState">OFF</b></div><div class="ai-row"><span>DATA</span><b>WIND · WAVES · CURRENT · STORMS</b></div></div>
-  <div class="divider"></div>
-  <small>SIMULATION</small>
-  <div class="stat-grid"><div><span>SIM TIME</span><b id="simTime">0 h</b></div><div><span>ACTIVE</span><b id="activeCount">0</b></div><div><span>SUCCESS</span><b id="completedCount">0</b></div><div><span>FAILED</span><b id="failedCount">0</b></div></div><div class="hint sim-pulse" id="simActivity"><i id="simPulse"></i> Waiting for simulation tick...</div>
-  <button class="ghost full" id="resetBtn">RESET SCENARIO</button>
-</aside>
+    <div class="top-actions">
+      <div class="pill">
+        <i id="statusDot"></i>
+        <span id="statusText" role="status">SIMULATION READY</span>
+      </div>
+      <div class="pill" id="gpuPill">AI · CPU</div>
+      <button class="icon-btn" id="weatherToggle" title="Toggle weather visualizer [W]" aria-controls="weatherHud" aria-expanded="false">
+        <span>☁️</span> WEATHER
+      </button>
+      <button class="icon-btn" id="resetViewBtn" title="Reset camera to North-up view">
+        <span>🧭</span> NORTH UP
+      </button>
+      <a class="icon-btn" href="training.html" title="Open PPO Reinforcement Learning Lab">
+        <span>⚡</span> TRAINING
+      </a>
+      <a class="icon-btn" href="analytics.html" title="Open Evaluation & Benchmark Deck">
+        <span>📊</span> EVALUATION
+      </a>
+      <button class="icon-btn" id="cinemaBtn" title="Toggle cinematic full-globe mode [H]" aria-label="Toggle cinematic mode">
+        <span>◈</span>
+      </button>
+      <button class="icon-btn" id="leftToggle" title="Toggle Mission Control [M]" aria-label="Toggle mission control" aria-controls="leftPanel" aria-expanded="true">
+        <span>☰</span>
+      </button>
+      <button class="icon-btn" id="rightToggle" title="Toggle Live Telemetry [I]" aria-label="Toggle telemetry panel" aria-controls="rightPanel" aria-expanded="true">
+        <span>◫</span>
+      </button>
+    </div>
+  </header>
 
-<aside id="rightPanel" class="side-panel right glass">
-  <div class="panel-head"><div><small>LIVE TELEMETRY</small><h2 id="selectedTitle">Fleet overview</h2></div><button class="mini-btn" id="collapseRight">×</button></div>
-  <div id="selectedEmpty" class="empty-state">Select a vessel on the globe to inspect its learned navigation state.</div>
-  <div id="selectedShip" hidden>
-    <div class="ship-title"><span id="shipId">NV-000</span><b id="shipStatus">ACTIVE</b></div>
-    <div class="route-pair"><div><small>ORIGIN</small><b id="shipOrigin">—</b></div><div class="arrow">→</div><div><small>DESTINATION</small><b id="shipDestination">—</b></div></div>
-    <div class="telemetry-grid"><div><span>FUEL</span><b id="shipFuel">—</b></div><div><span>CLEARANCE</span><b id="shipClearance">—</b></div><div><span>HEADING</span><b id="shipHeading">—</b></div><div><span>PROGRESS</span><b id="shipProgress">—</b></div><div><span>AI ACTION</span><b id="shipAction">—</b></div><div><span>REWARD</span><b id="shipReward">—</b></div></div>
-    <div class="clearance"><div><span>LAND SAFETY FIELD</span><b id="clearanceText">SAFE</b></div><div class="bar"><i id="clearanceBar"></i></div></div>
-  </div>
-  <div class="divider"></div>
-  <small>ENVIRONMENT FIELD</small>
-  <div class="condition-grid"><div><span>WIND</span><b id="windValue">—</b></div><div><span>WAVE</span><b id="waveValue">—</b></div><div><span>CURRENT</span><b id="currentValue">—</b></div><div><span>STORMS</span><b id="stormValue">—</b></div></div>
-  <div class="divider"></div>
-  <small>OUTCOMES</small>
-  <div class="outcome-grid"><div><span>LAND COLLISIONS</span><b id="collisions">0</b></div><div><span>COMPLETED</span><b id="successes">0</b></div><div><span>FAILED</span><b id="weatherLoss">0</b></div><div><span>NEAR MISS</span><b id="nearMiss">0</b></div></div>
-</aside>
+  <!-- Left Drawer: Mission Control & Fleet Settings -->
+  <aside id="leftPanel" class="side-panel left glass" aria-label="Mission control">
+    <div class="panel-head">
+      <div>
+        <small>MISSION CONTROL</small>
+        <h2>Fleet Simulator</h2>
+      </div>
+      <button class="mini-btn" id="collapseLeft" aria-label="Close mission control">✕</button>
+    </div>
 
-<section id="bottomHud" class="bottom glass">
-  <div><small>GLOBAL SYNTHETIC FLEET</small><h3 id="fleetTitle">No scenario loaded</h3></div>
-  <div class="metrics"><div><span>VESSELS</span><b id="total">0</b></div><div><span>SUCCESS</span><b id="success">0%</b></div><div><span>FUEL USED</span><b id="fuel">0 t</b></div><div><span>CO₂</span><b id="co2">0 t</b></div><div><span>AVG RISK</span><b id="avgRisk">0</b></div><div><span>PORTS</span><b id="portCount">279</b></div></div>
-  <div class="progress"><i id="fleetProgress"></i></div>
-</section>
+    <label for="vesselCount">Active Vessels <b id="vesselCountValue">60</b></label>
+    <input id="vesselCount" type="range" min="10" max="300" step="10" value="60">
 
-<div id="toast" class="toast"></div>
+    <label for="scenarioSeed">Scenario Seed</label>
+    <input id="scenarioSeed" type="number" value="20260922" min="0" max="2147483647" step="1">
 
-<script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
-<script src="js/simulation.js?v=205"></script>
-</body></html>
+    <div class="button-grid">
+      <button class="ghost" id="saveScenario" title="Export current scenario definition">SAVE SCENARIO</button>
+      <button class="ghost" id="loadScenario" title="Import versioned scenario file">LOAD SCENARIO</button>
+    </div>
+    <input id="scenarioFile" type="file" accept="application/json,.json" hidden>
+    <button class="ghost full" id="exportRun" disabled title="Export telemetry history of the current run">EXPORT RUN + TRACKS</button>
+
+    <div class="button-grid">
+      <button class="primary" id="startBtn">START SIMULATION</button>
+      <button class="secondary" id="stepBtn">STEP +1H</button>
+    </div>
+    <button class="run" id="playBtn" hidden>■ STOP SIMULATION</button>
+
+    <div class="speed-control">
+      <label for="simulationSpeed">Simulation Rate</label>
+      <select id="simulationSpeed">
+        <option value="0.5">0.5 Sim Hour / Sec (Smooth Detail)</option>
+        <option value="1" selected>1 Sim Hour / Sec (Standard 1 Hz)</option>
+        <option value="2">2 Sim Hours / Sec (2x Speed)</option>
+        <option value="4">4 Sim Hours / Sec (4x Speed)</option>
+        <option value="8">8 Sim Hours / Sec (8x Hyper)</option>
+      </select>
+    </div>
+
+    <div class="divider"></div>
+    <small>FLEET SEARCH &amp; RADAR</small>
+    <div class="vessel-search-box">
+      <input id="vesselSearch" type="search" placeholder="Search vessel ID (e.g. NV-012)..." aria-label="Search vessel ID">
+    </div>
+    <div class="filter-chips" role="group" aria-label="Filter vessels">
+      <button type="button" class="filter-chip active" data-filter="all">ALL</button>
+      <button type="button" class="filter-chip" data-filter="active">ACTIVE</button>
+      <button type="button" class="filter-chip" data-filter="risk">COAST RISK</button>
+      <button type="button" class="filter-chip" data-filter="completed">ARRIVED</button>
+    </div>
+
+    <div class="divider"></div>
+    <small>NEURAL NAVIGATION AGENT</small>
+    <div class="ai-card">
+      <div class="ai-row"><span>POLICY</span><b id="policyState">UNTRAINED</b></div>
+      <div class="ai-row"><span>DEVICE</span><b id="policyDevice">CPU</b></div>
+      <div class="ai-row"><span>CONTROLLER</span><b id="policyAlgorithm">Bootstrap heuristic</b></div>
+      <div class="ai-row"><span>SAFETY SHIELD</span><b style="color:var(--green)">LAND SAFE (5 KM)</b></div>
+    </div>
+    <div class="hint">Vessels execute continuous 25-feature state observations and evaluate safe heading maneuvers.</div>
+    <a class="train full nav-link" href="training.html">OPEN TRAINING LAB →</a>
+
+    <div class="divider"></div>
+    <small>OCEAN ENVIRONMENT</small>
+    <div class="ai-card">
+      <div class="ai-row"><span>WEATHER MODEL</span><b id="weatherMode">PROCEDURAL MODEL</b></div>
+      <div class="ai-row"><span>VISUALIZER</span><b id="weatherState">OFF</b></div>
+      <div class="ai-row"><span>DYNAMICS</span><b>WIND · WAVES · CURRENT · STORMS</b></div>
+    </div>
+
+    <div class="divider"></div>
+    <small>SIMULATION TIMELINE</small>
+    <div class="stat-grid">
+      <div><span>SIM TIME</span><b id="simTime">0.0 h</b></div>
+      <div><span>ACTIVE</span><b id="activeCount" style="color:var(--cyan)">0</b></div>
+      <div><span>VOYAGES DONE</span><b id="completedCount" style="color:var(--green)">0</b></div>
+      <div><span>FAILURES</span><b id="failedCount" style="color:var(--red)">0</b></div>
+    </div>
+    <div class="hint sim-pulse" id="simActivity">
+      <i id="simPulse" class="pill" style="padding:0;min-height:auto;"><i style="margin:0;"></i></i> Waiting for simulation tick...
+    </div>
+    <button class="ghost full" id="resetBtn">RESET SCENARIO</button>
+  </aside>
+
+  <!-- Right Drawer: Vessel Telemetry & Outcome Analytics -->
+  <aside id="rightPanel" class="side-panel right glass" aria-label="Live vessel and environment telemetry">
+    <div class="panel-head">
+      <div>
+        <small>LIVE COCKPIT</small>
+        <h2 id="selectedTitle">Fleet Overview</h2>
+      </div>
+      <button class="mini-btn" id="collapseRight" aria-label="Close telemetry panel">✕</button>
+    </div>
+
+    <div id="selectedEmpty" class="empty-state">
+      Click on any vessel marker on the globe to inspect real-time neural decisions, fuel consumption, and voyage tracking.
+    </div>
+
+    <div id="selectedShip" hidden>
+      <div class="ship-title">
+        <span id="shipId">NV-000</span>
+        <b id="shipStatus">ACTIVE</b>
+      </div>
+      <div class="route-pair">
+        <div><small>ORIGIN</small><b id="shipOrigin">—</b></div>
+        <div class="arrow">→</div>
+        <div><small>DESTINATION</small><b id="shipDestination">—</b></div>
+      </div>
+      <div class="telemetry-grid">
+        <div><span>FUEL LEVEL</span><b id="shipFuel">—</b></div>
+        <div><span>CLEARANCE</span><b id="shipClearance">—</b></div>
+        <div><span>HEADING</span><b id="shipHeading">—</b></div>
+        <div><span>PROGRESS</span><b id="shipProgress">—</b></div>
+        <div><span>ACTION</span><b id="shipAction">—</b></div>
+        <div><span>REWARD</span><b id="shipReward">—</b></div>
+      </div>
+      <div class="clearance">
+        <div>
+          <span>LAND SAFETY BUFFER</span>
+          <b id="clearanceText">SAFE</b>
+        </div>
+        <div class="bar"><i id="clearanceBar"></i></div>
+      </div>
+      <div class="trace-card">
+        <label for="traceCursor">RECORDED VOYAGE TRACK <b id="tracePointCount">0 samples</b></label>
+        <input id="traceCursor" type="range" min="0" max="0" value="0" disabled>
+        <div id="traceReadout" class="trace-readout" role="status">Select a vessel to inspect historical track data.</div>
+        <div class="button-grid">
+          <button class="ghost" id="traceLive" disabled>LIVE TRACK</button>
+          <button class="ghost" id="exportTrack" disabled>EXPORT TRACE</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <small>LOCAL ENVIRONMENT FIELD</small>
+    <div class="condition-grid">
+      <div><span>WIND</span><b id="windValue">—</b></div>
+      <div><span>WAVES</span><b id="waveValue">—</b></div>
+      <div><span>CURRENT</span><b id="currentValue">—</b></div>
+      <div><span>STORMS</span><b id="stormValue">—</b></div>
+    </div>
+
+    <div class="divider"></div>
+    <small>SAFETY & OUTCOMES</small>
+    <div class="outcome-grid">
+      <div><span>LAND COLLISIONS</span><b id="collisions" style="color:var(--red)">0</b></div>
+      <div><span>COMPLETED</span><b id="successes" style="color:var(--green)">0</b></div>
+      <div><span>FUEL EXHAUSTED</span><b id="fuelFailures">0</b></div>
+      <div><span>SAFE RECOVERIES</span><b id="safeRecoveries" style="color:var(--cyan)">0</b></div>
+      <div><span>NO SAFE ACTION</span><b id="noSafeFailures">0</b></div>
+    </div>
+  </aside>
+
+  <!-- Bottom Floating HUD: Fleet Telemetry Bar -->
+  <section id="bottomHud" class="bottom glass" aria-label="Fleet summary">
+    <div>
+      <small>GLOBAL AUTONOMOUS FLEET TELEMETRY</small>
+      <h3 id="fleetTitle">Initializing synthetic fleet...</h3>
+    </div>
+    <div class="metrics">
+      <div><span>VESSELS</span><b id="total">0</b></div>
+      <div><span>SUCCESS RATE</span><b id="success" style="color:var(--green)">0%</b></div>
+      <div><span>AVG FUEL</span><b id="fuel">0 t</b></div>
+      <div><span>AVG CO₂</span><b id="co2">0 t</b></div>
+      <div><span>AVG RISK</span><b id="avgRisk">0</b></div>
+      <div><span>PORT NODES</span><b id="portCount">279</b></div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Active vessel share" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <i id="fleetProgress"></i>
+    </div>
+  </section>
+
+  <!-- System Alert Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+  <script src="js/simulation.js?v=500"></script>
+</body>
+</html>

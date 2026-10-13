@@ -3,28 +3,26 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
+from backend import config
 from backend.routers import simulation
 
-ROOT = Path(__file__).resolve().parents[1]
-FRONTEND_DIR = ROOT / "frontend"
+ROOT = config.ROOT
+FRONTEND_DIR = config.FRONTEND_DIR
 
-app = FastAPI(title="NAVRUNA — Offline Maritime AI Simulation Lab", version="4.1.3", docs_url="/docs")
+APP_VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+app = FastAPI(title="NAVRUNA — Maritime Research Simulator", version=APP_VERSION, docs_url="/docs")
 
-# The local launcher serves the UI from a second process on :8080, so the API is
-# cross-origin there. On a host that serves both from one origin CORS is unused;
-# set NAVRUNA_ALLOWED_ORIGINS (comma-separated) when the UI lives elsewhere.
-_default_origins = "http://127.0.0.1:8080,http://localhost:8080"
-_origins = [o.strip() for o in os.getenv("NAVRUNA_ALLOWED_ORIGINS", _default_origins).split(",") if o.strip()]
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.ALLOWED_HOSTS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_origins,
-    allow_origin_regex=r"https?://.*\.antideploy\.app",
+    allow_origins=config.ALLOWED_ORIGINS,
     allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 app.include_router(simulation.router)
@@ -40,9 +38,11 @@ async def health():
     """
     return {
         "status": "ok",
-        "mode": "OFFLINE_SYNTHETIC_RL",
-        "external_apis": False,
-        "message": "All navigation, land, ports and ocean conditions are generated/read locally.",
+        "mode": "LOCAL_SYNTHETIC_RESEARCH",
+        "app_version": APP_VERSION,
+        "simulation_external_feeds_required": False,
+        "browser_map_requires_internet": True,
+        "message": "Simulation inputs are local and synthetic. CesiumJS and OpenStreetMap imagery are loaded by the browser from external providers.",
     }
 
 

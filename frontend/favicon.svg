@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="50%" stop-color="#05ffa1"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#030712" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#030712"/>
+  <circle cx="32" cy="32" r="28" fill="url(#glow)"/>
+  <circle cx="32" cy="32" r="24" stroke="rgba(0, 242, 254, 0.35)" stroke-width="1.5" fill="none"/>
+  <!-- Compass crosshair ticks -->
+  <line x1="32" y1="4" x2="32" y2="10" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="54" x2="32" y2="60" stroke="#00f2fe" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="4" y1="32" x2="10" y2="32" stroke="#00f2fe" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="54" y1="32" x2="60" y2="32" stroke="#00f2fe" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Central Vessel / Arrow Vector -->
+  <path d="M32 14 L44 46 L32 40 L20 46 Z" fill="url(#navGrad)"/>
+  <circle cx="32" cy="32" r="3" fill="#ffffff"/>
+</svg>

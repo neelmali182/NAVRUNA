@@ -1,238 +1,218 @@
-<<<<<<< HEAD
-# NAVRUNA v4 — Offline Maritime AI Simulation Lab
+# NAVRUNA
 
-NAVRUNA is an offline-first research simulator in which vessels are **not given a pre-computed route**. Each vessel receives an origin, destination, fuel budget and local synthetic ocean state. A shared PPO navigation policy chooses heading actions step-by-step.
+**Maritime Research Simulator and Reinforcement Learning Lab**
 
-## What changed
+NAVRUNA is a local research application for experimenting with autonomous vessel navigation in a synthetic ocean environment. It combines a 3D fleet simulator, a Proximal Policy Optimization (PPO) training workflow, procedural weather, and fixed-seed policy evaluation.
 
-- Replaced predefined route polylines with autonomous navigation decisions.
-- Added a 279-location curated global port catalog in `data/ports/ports.json`.
-- Replaced the coarse hand-written coastline with an offline GSHHS intermediate-resolution land dataset in `data/geography/land.geojson`.
-- Added a raster land-distance/safety field for fast RL observations.
-- Added continuous swept-segment land collision detection with a configurable 5 km safety buffer.
-- Added a deployment safety shield: PPO actions are screened before movement and unsafe actions are not executed.
-- Added actual PyTorch PPO training with parallel environments, curriculum learning and action masking.
-- Added procedural wind, wave, current and storm fields; no live feeds are required.
-- Added vessel fuel budgets and terminal failure on fuel exhaustion/time limit.
-- Added RTX/CUDA detection and GPU-compatible policy training. The training code uses the CUDA device automatically when PyTorch exposes it.
-- Removed route drawing from the UI. Ships move independently; the globe shows only vessel state and ports by default.
-- Reworked the Cesium globe UI with modern glass panels, hideable HUDs, cinematic mode and vessel telemetry.
-- Added local port and land assets to the frontend so simulation data is available without an API call.
+NAVRUNA is intended for software development, reinforcement-learning research, and classroom demonstrations. It is not a navigation system and must not be used to operate real vessels or make safety-critical decisions.
 
-## RL formulation
+## About
 
-### Observation
+The application simulates port-to-port voyages using a bundled port catalog and coastline data. A browser-based Cesium globe displays vessel movement, environment conditions, and telemetry. The backend runs the navigation environment, applies a coastline safety shield, and manages policy training and evaluation.
 
-The policy receives a 25-value local state containing:
+Weather and voyage conditions are synthetic and seeded for repeatable experiments. Browser map imagery and CesiumJS assets are loaded from external providers, so the full browser experience requires an internet connection by default even though simulation inputs are local.
 
-- ship position and heading
-- relative bearing/distance to destination
-- remaining fuel
-- speed
-- synthetic wind, waves and current
-- storm intensity
-- seven directional land-clearance probes
+### Key capabilities
 
-### Actions
+- Simulate fleets of 10–300 vessels on a 3D globe.
+- Inspect vessel telemetry, recent tracks, voyage outcomes, and fleet metrics.
+- Explore procedural wind, waves, currents, and storm conditions.
+- Train a shared PPO navigation policy with configurable transition targets and parallel environments.
+- Run paired-seed evaluations against the bootstrap steering baseline and, when available, a trained checkpoint.
+- Save and load versioned scenarios, and export simulation records, tracks, training reports, and evaluation results as JSON.
 
-Seven discrete heading changes:
+## Requirements
 
-`-35°, -20°, -10°, 0°, +10°, +20°, +35°`
+- Windows with PowerShell for the included launcher.
+- Python 3.11, 3.12, or 3.13.
+- Internet access for the browser-hosted CesiumJS assets and OpenStreetMap imagery.
+- An NVIDIA GPU is optional. The application can run on CPU; the launcher can install CUDA-enabled PyTorch when a supported NVIDIA setup is detected.
 
-### Reward
+The launcher installs dependencies from `requirements.txt` into a local `.venv` when needed. Initial setup may take several minutes, depending on the network and whether PyTorch needs to be installed.
 
-Terminal rewards:
+## Quick start
 
-- destination reached: **+2**
-- land collision: **-2**
-- fuel exhausted/time limit: **-2**
+From the project directory, run either command:
 
-Shaping rewards provide small progress/fuel/land-clearance signals between terminal events.
-
-## Land collision architecture
-
-The collision system intentionally does not rely on checking only the ship's current point.
-
-1. Offline coastline polygons are loaded from GSHHS-derived GeoJSON.
-2. A 0.25° occupancy/distance field provides fast RL screening.
-3. Every movement is treated as a swept segment.
-4. The segment is sampled continuously and checked against the vector coastline and safety field.
-5. A 5 km configurable safety buffer prevents the vessel from entering land-adjacent water in the simulation.
-6. During deployment, the same geometry is used as a safety shield before executing the learned action.
-
-This is a simulation guarantee at the resolution/accuracy of the bundled geographic dataset; it is not a claim of real-world nautical safety.
-
-## Training
-
-The backend uses:
-
-- PyTorch PPO
-- shared policy network: `256 → 256 → 128`
-- parallel environments
-- curriculum learning (open-water point-to-point control first, land-constrained navigation second)
-- action masking
-- CUDA when available
-
-Use **TRAIN NAVIGATION POLICY** from the UI. On your RTX 4050, a CUDA-enabled PyTorch installation will be selected automatically.
-
-The included baseline is intentionally trainable rather than pretending that a small local checkpoint is production maritime intelligence. For demonstrations, train a longer run after installation and inspect the resulting checkpoint in `data/models/`.
-
-## Running on Windows
-
-1. Install Python 3.11–3.13.
-2. Run `run_navruna.bat`.
-3. The launcher creates `.venv`, installs requirements, starts the backend on port 8000 and frontend on port 8080.
-4. Open `http://127.0.0.1:8080/`.
-
-API docs: `http://127.0.0.1:8000/docs`
-
-## Offline note
-
-All **simulation data and AI environment data** are local. The visual globe currently uses CesiumJS and its Natural Earth imagery asset from the Cesium CDN. For a fully air-gapped installation, self-host the CesiumJS distribution and its imagery assets under `frontend/vendor/` and replace the two CDN references in `frontend/index.html`.
-
-## Project structure
-
-```text
-NAVRUNA/
-├── backend/
-│   ├── main.py
-│   └── routers/simulation.py
-├── data/
-│   ├── geography/land.geojson
-│   ├── ports/ports.json
-│   └── models/
-├── frontend/
-│   ├── index.html
-│   ├── analytics.html
-│   ├── css/
-│   ├── js/
-│   └── data/
-├── model/
-│   ├── navigation/geodata.py
-│   ├── rl/navigation_env.py
-│   ├── rl/ppo.py
-│   └── simulation/fleet_simulator.py
-├── tests/
-├── requirements.txt
-├── pyproject.toml
-└── run_navruna.bat
+```powershell
+.\run_navruna.bat
 ```
 
-## Validation
-
-Run:
-
-```bash
-pytest -q
-```
-
-The test suite covers the port catalog, vector land collision authority, RL observation/network dimensions and the no-preplanned-route fleet architecture.
-
-## Research boundary
-
-NAVRUNA is a synthetic simulation and software engineering project. It is **not** a certified navigation system and should not be used to control real vessels. Real-world deployment would require validated nautical charts, bathymetry, COLREGS-aware behavior, AIS/weather/ocean data, vessel dynamics, uncertainty modeling, verification/validation and human oversight.
-
-## v4.1 additions
-
-- `model/weather/` is the dedicated offline weather/ocean simulation subsystem.
-- Procedural wind, waves, currents, storms, precipitation, visibility and pressure are spatially coherent and time-varying.
-- The simulator exposes a weather visualizer toggle (`W` hotkey) with wind vectors and storm intensity overlay.
-- Ships render using the bundled `frontend/assets/ship.svg` image asset instead of primitive ellipsoids.
-- `/api/simulation/training` exposes PPO training telemetry and history.
-- `/api/simulation/train` starts training in a background worker so the Training Lab can monitor it live.
-- `frontend/training.html` provides model-training telemetry, loss/return/success/entropy/KL graphs, hyperparameters and CUDA/device status.
-
-## v4.1.1 vessel visualization
-- Replaced the generic SVG vessel marker with the supplied top-down container ship image.
-- Vessel icons now rotate with the learned heading, preserve the original image colors, and scale with camera distance.
-- Status is shown with a small point indicator rather than tinting the ship image.
-
-
-## v4.1.2 weather visualizer + launcher fixes
-
-- Windy-inspired ocean weather visualization with smooth color-field gradients, animated particles, directional streamlines and selectable Waves/Wind/Current/Storm layers.
-- Weather API is independent of fleet generation and is available immediately after backend startup.
-- Weather field resolution increased for smoother global visualization.
-- Startup launcher now prefers a working active Python/Conda environment and avoids unnecessary Windows `ensurepip` virtual-environment hangs.
-- OpenStreetMap is used for the browser basemap to avoid the missing-tile block artifacts from the previous Natural Earth asset provider. Simulation and weather data remain synthetic/offline.
-=======
-# NAVRUNA 🚢
-
-**Offline Maritime AI Simulation Lab**
-
-NAVRUNA is an AI-powered maritime simulation platform for testing and developing intelligent vessel route optimization using simulated environments.
-
-## Features
-
-* 🚢 Maritime vessel simulation
-* 🗺️ Interactive 3D map
-* 🤖 Reinforcement Learning-based navigation
-* 🌊 Simulated wind and wave conditions
-* 🧭 Route optimization
-* ⛽ Fuel and time optimization
-* 🌱 Carbon emission estimation
-* 📊 Training and simulation metrics
-* 💻 Offline simulation environment
-
-## Tech Stack
-
-* Python
-* PyTorch
-* Reinforcement Learning
-* CesiumJS
-* JavaScript / HTML / CSS
-
-## How to Use
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/NAVRUNA.git
-cd NAVRUNA
-```
-
-### 2. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Start NAVRUNA
-
-**Windows:**
+or:
 
 ```powershell
 .\start.ps1
 ```
 
-or:
+The launcher starts the API and frontend, waits for both to respond, and opens the simulator in your browser.
 
-```bash
-run_navruna.bat
+| Service | Address |
+| --- | --- |
+| Simulator | [http://127.0.0.1:8080/](http://127.0.0.1:8080/) |
+| Training Lab | [http://127.0.0.1:8080/training.html](http://127.0.0.1:8080/training.html) |
+| Evaluation | [http://127.0.0.1:8080/analytics.html](http://127.0.0.1:8080/analytics.html) |
+| API health | [http://127.0.0.1:8000/api/health](http://127.0.0.1:8000/api/health) |
+| Interactive API documentation | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) |
+
+### Manual local setup
+
+Use this option if you prefer to start the services yourself. Open two PowerShell terminals from the project directory.
+
+Create the environment and install dependencies once:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### 4. Open the Application
+In the first terminal, start the API:
 
-Open the local URL shown in the terminal, usually:
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
+
+In the second terminal, serve the browser interface:
+
+```powershell
+Set-Location frontend
+..\.venv\Scripts\python.exe -m http.server 8080
+```
+
+Then open [http://127.0.0.1:8080/](http://127.0.0.1:8080/) in a browser. Keep both terminals running while using the application.
+
+## How to use
+
+### Run a fleet simulation
+
+1. Open the Simulator and set the scenario seed and fleet size in Mission Control.
+2. Optionally save the scenario to a JSON file or load a previously saved scenario. Loaded scenarios are checked against the local data and weather-model versions.
+3. Select **Start Simulation** to generate the fleet. Use **Step +1H** for a single simulated hour, or start continuous simulation.
+4. Choose a simulation speed of 1, 2, 5, or 10 simulated hours per second. The default is 1 hour per second.
+5. Select a vessel on the globe to inspect its telemetry and recent track. Export the run record or selected vessel trace when needed.
+6. Use the weather controls to show synthetic wind, waves, current, or storm layers and inspect values on the globe.
+
+Starting a fleet captures a snapshot of the available controller. A later training run will not change the policy used by that fleet.
+
+### Train the navigation policy
+
+1. Open the **Training Lab** from the top navigation or visit `/training.html`.
+2. Set a transition target, number of parallel environments, and learning rate. The default settings are 250,000 transitions, 64 environments, and a learning rate of 0.0003.
+3. Select **Start Training**. Training progress, episode metrics, optimization diagnostics, and activity logs update on the page.
+4. Enable **Continue until stopped** for a continuous run, or use **Stop Training** to stop after the current PPO update.
+5. Export the run report as JSON if you need to preserve its settings and metrics.
+
+Training can run while an existing fleet continues using its controller snapshot. A newly started fleet cannot initialize while training is active. A trained checkpoint is used for fleet control only when its model and navigation-interface versions are compatible; otherwise NAVRUNA uses the bootstrap steering controller.
+
+### Evaluate controllers
+
+1. Open **Evaluation** from the top navigation or visit `/analytics.html`.
+2. Choose the number of voyages and a starting seed.
+3. Select **Run Paired Evaluation**. Available controllers receive the same seed range so their results can be compared on matching scenarios.
+4. Download the report as JSON for further analysis.
+
+Evaluation is a small synthetic research benchmark. Its sample count and confidence intervals are descriptive; they do not establish real-world safety or statistical significance.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Browser[Browser UI<br/>Cesium globe, training, evaluation]
+    API[FastAPI service]
+    Fleet[Fleet simulator]
+    Env[Navigation environment]
+    Shield[Action mask and coastline safety checks]
+    Weather[Procedural weather model]
+    Trainer[PPO trainer<br/>parallel environments]
+    Policy[Versioned policy checkpoint]
+    Eval[Paired-seed evaluator]
+    Data[(Bundled ports and coastline)]
+
+    Browser <--> API
+    API --> Fleet
+    API --> Trainer
+    API --> Eval
+    API --> Weather
+    Fleet --> Env
+    Env --> Shield
+    Shield --> Env
+    Weather --> Env
+    Trainer --> Policy
+    Policy -. snapshot at fleet start .-> Fleet
+    Eval --> Env
+    Data --> Env
+    Data --> API
+```
+
+### Main components
+
+- **Browser interface (`frontend/`)** — provides the globe, simulation controls, weather overlays, training telemetry, and evaluation reports.
+- **FastAPI service (`backend/`)** — exposes simulation, training, evaluation, weather, scenario, and local-data endpoints. The included launcher binds it to `127.0.0.1:8000`.
+- **Fleet simulator (`model/simulation/`)** — creates vessels, advances voyages, records outcomes, and uses a controller snapshot captured when the fleet starts.
+- **Navigation environment (`model/rl/navigation_env.py`)** — defines observations, actions, rewards, vessel movement, and voyage termination.
+- **Safety and geography (`model/navigation/`, `data/`)** — checks course actions against the bundled coastline and a land-clearance buffer before movement.
+- **Weather model (`model/weather/`)** — produces deterministic, procedural ocean conditions from a seed and simulation time.
+- **PPO trainer and evaluator (`model/rl/`)** — train a shared policy in parallel environments and compare available controllers over paired seeds.
+
+The policy selects among nine ordinary course changes and a learned recovery action. The safety shield independently validates the selected course; it remains in force during fleet simulation, training, and evaluation. Fleet vessel classes use different cruise speeds, while training samples across the supported speed range.
+
+For further implementation detail, see [Architecture](docs/ARCHITECTURE.md) and the [PPO Model Card](docs/MODEL_CARD.md).
+
+## API overview
+
+The full request and response schemas are available through the interactive documentation at `/docs`.
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/health` | Check that the local API is responding. |
+| `POST /api/simulation/start` | Initialize a fleet from a seed or validated scenario. |
+| `POST /api/simulation/step` | Advance the fleet by the requested number of simulated hours. |
+| `GET /api/simulation/state` | Read the current fleet, run metadata, and scenario. |
+| `GET /api/simulation/training` | Read training status, progress, and history. |
+| `POST /api/simulation/train` | Start a PPO training run. |
+| `POST /api/simulation/train/stop` | Request that an active training run stop. |
+| `POST /api/simulation/evaluate` | Run a paired-seed controller evaluation. |
+| `GET /api/simulation/scenario/schema` | Retrieve the current scenario JSON Schema. |
+| `GET /api/simulation/scenario/template` | Create a local scenario template with dataset fingerprints. |
+| `GET /api/simulation/weather` | Retrieve a synthetic weather grid. |
+| `GET /api/simulation/ports`, `GET /api/simulation/coastline` | Retrieve the local map data used by the application. |
+
+## Project structure
 
 ```text
-http://localhost:8000
+backend/             FastAPI application and simulation API
+data/                Bundled ports, coastline, and data notes
+docs/                Architecture, model card, and project reports
+frontend/            Simulator, training, and evaluation interfaces
+model/navigation/    Geography and coastline safety checks
+model/rl/            Navigation environment, PPO trainer, evaluation
+model/simulation/    Fleet simulator and vessel behavior
+model/weather/       Procedural weather model
+tests/               Automated regression tests
 ```
 
-### 5. Run a Simulation
+## Development and tests
 
-1. Open the NAVRUNA dashboard.
-2. Select **Simulation**.
-3. Select a vessel and route.
-4. Start the simulation.
-5. Observe the vessel navigation and route performance.
-6. Use the training section to experiment with the Reinforcement Learning model.
+Run the existing regression suite from the project directory:
 
-## Project Goal
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
 
-To develop an intelligent maritime navigation system that can find efficient routes while reducing **travel time, fuel consumption, and carbon emissions**.
+The main implementation settings are in `requirements.txt` and `pyproject.toml`. The Windows launcher is `start.ps1`; `run_navruna.bat` is a convenience entry point.
 
-## Status
+## Data, security, and limitations
 
-🚧 **Under Development**
->>>>>>> 4b730e0a3b3374da292cca306468ea1ce34053bb
+- Simulation inputs are local and synthetic. The browser loads CesiumJS assets and OpenStreetMap imagery from external providers by default.
+- The bundled coastline is identified as GSHHS-derived in [`data/README.md`](data/README.md). Review the data documentation and source licensing before redistributing the project or its data.
+- Vessel dynamics and fuel use are simplified. NAVRUNA does not include validated bathymetry, live AIS, historical weather replay, operational route planning, validated encounter or COLREGS behavior, or evidence of real-world navigational safety.
+- The local API is configured for loopback use and has no authentication. Do not expose it to a public network without adding authentication, request limits, and a deployment security review.
+- Synthetic weather is not a forecast, and simulated performance is not evidence of real-world voyage performance or regulatory compliance.
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [PPO Model Card](docs/MODEL_CARD.md)
+- [Data notes](data/README.md)
+- [Bug and reliability report](docs/BUG_REPORT.md)
+

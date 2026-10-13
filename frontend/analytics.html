@@ -1,1 +1,135 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NAVRUNA — AI Analytics</title><link rel="stylesheet" href="css/styles.css?v=101"></head><body style="overflow:auto"><header class="topbar glass"><div class="brand"><div class="brand-main">NAV<span>RUNA</span></div><div class="brand-sub">AI TRAINING TELEMETRY · OFFLINE</div></div><div class="top-actions"><a class="icon-btn" href="index.html">← SIMULATOR</a></div></header><main style="max-width:1180px;margin:100px auto 40px;padding:16px"><section class="glass" style="padding:22px;border-radius:12px"><small>REINFORCEMENT LEARNING EXPERIMENT</small><h1 style="font-size:32px;margin:8px 0">Autonomous ocean navigation</h1><p style="color:var(--muted);max-width:800px;line-height:1.6">PPO trains a shared policy from synthetic voyages. The final deployment loop applies a hard land-safety shield and continuous swept-path collision checking. No live AIS, weather or ocean feed is required.</p><button class="train" id="trainBtn" style="max-width:320px">TRAIN 20K STEPS</button></section><section class="stat-grid" style="margin-top:12px"><div class="glass stat"><small>POLICY</small><b id="trained">UNTRAINED</b><em>shared navigation policy</em></div><div class="glass stat"><small>DEVICE</small><b id="device">CPU</b><em>PyTorch runtime</em></div><div class="glass stat"><small>TRAINING EPISODES</small><b id="episodes">0</b><em>terminal episodes</em></div><div class="glass stat"><small>PORTS</small><b id="ports">279</b><em>offline port catalog</em></div></section><section class="glass" style="margin-top:12px;padding:18px"><div class="card-head"><b>TRAINING REPORT</b><span>latest PPO checkpoint</span></div><pre id="report" style="white-space:pre-wrap;color:var(--cyan);line-height:1.6;font:12px ui-monospace,monospace"></pre></section><section class="glass" style="margin-top:12px;padding:18px"><div class="card-head"><b>MODEL DESIGN</b><span>production-oriented baseline</span></div><div class="data-tags"><span>PPO</span><span>256×256×128 policy MLP</span><span>parallel environments</span><span>curriculum learning</span><span>action masking</span><span>land distance field</span><span>continuous collision sweep</span><span>fuel constraint</span><span>procedural wind/current/waves</span><span>RTX CUDA support</span></div></section></main><script src="js/analytics.js?v=101"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NAVRUNA — Autonomous Fleet Evaluation & Benchmark Deck</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=500">
+</head>
+<body class="analytics-page">
+  <!-- Top Navigation Bar -->
+  <header class="topbar glass">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10" stroke="#38bdf8"/>
+          <line x1="12" y1="20" x2="12" y2="4" stroke="#6366f1"/>
+          <line x1="6" y1="20" x2="6" y2="14" stroke="#a855f7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-main">NAV<span>RUNA</span></div>
+        <div class="brand-sub">CONTROLLER BENCHMARK & EVALUATION DECK</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a class="icon-btn" href="index.html">
+        <span>🌐</span> SIMULATOR
+      </a>
+      <a class="icon-btn" href="training.html">
+        <span>⚡</span> TRAINING LAB
+      </a>
+    </div>
+  </header>
+
+  <!-- Evaluation Workspace -->
+  <main class="analytics-main">
+    <!-- Hero Evaluation Benchmark Runner -->
+    <section class="glass hero-panel">
+      <small>MONTE CARLO PAIRED EVALUATION</small>
+      <h1>Autonomous Navigation Benchmark Deck</h1>
+      <p>
+        Execute side-by-side controller comparisons across identical procedural scenarios and synthetic weather conditions.
+        Every controller is subjected to the exact same seed environments to isolate policy performance, fuel consumption efficiency, and collision avoidance safety margins.
+      </p>
+
+      <div class="training-controls">
+        <div class="evaluation-controls">
+          <label for="evaluationEpisodes">
+            Voyages
+            <input id="evaluationEpisodes" type="number" min="1" max="32" step="1" value="8">
+          </label>
+          <label for="evaluationSeed">
+            Evaluation Seed
+            <input id="evaluationSeed" type="number" min="0" max="2147483647" step="1" value="20261012">
+          </label>
+        </div>
+        <button class="primary" id="evaluateBtn">RUN PAIRED EVALUATION</button>
+        <button class="ghost" id="downloadEvaluation" disabled aria-label="Download evaluation report as JSON">DOWNLOAD RESULTS JSON</button>
+      </div>
+      <div id="evaluationStatus" class="training-feedback" role="status" style="margin-top:12px;">
+        Ready for paired benchmark evaluation.
+      </div>
+    </section>
+
+    <!-- Key Benchmarking Metrics Grid -->
+    <section class="stat-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 16px;">
+      <div class="glass stat">
+        <small>ACTIVE POLICY</small>
+        <b id="trained" style="color:var(--cyan)">UNTRAINED</b>
+        <em>Shared RL navigation policy</em>
+      </div>
+      <div class="glass stat">
+        <small>ACCELERATOR</small>
+        <b id="device">CPU</b>
+        <em>PyTorch runtime environment</em>
+      </div>
+      <div class="glass stat">
+        <small>TRAINED EPISODES</small>
+        <b id="episodes" style="color:var(--green)">0</b>
+        <em>Terminal learning voyages</em>
+      </div>
+      <div class="glass stat">
+        <small>GLOBAL PORT NODES</small>
+        <b id="ports">279</b>
+        <em>GSHHS-verified marine ports</em>
+      </div>
+    </section>
+
+    <!-- Fixed-Seed Paired Evaluation Results -->
+    <section class="glass hero-panel">
+      <div class="card-head">
+        <b>PAIRED BENCHMARK RESULTS</b>
+        <span style="font-size:11px;color:var(--muted);font-family:var(--font-mono)">Identical Scenarios & Seed Pairings</span>
+      </div>
+      <div id="benchmarkTableContainer"></div>
+      <pre id="evaluationReport">Each controller receives the exact same fixed seeds. Run an evaluation above to generate a comprehensive comparison of voyage completion rates, minimum clearance, fuel economy, and ETA efficiency.</pre>
+    </section>
+
+    <!-- Detailed Telemetry & Fleet Performance Audit -->
+    <section class="glass hero-panel">
+      <div class="card-head">
+        <b>SYSTEM TELEMETRY AUDIT REPORT</b>
+        <span style="font-size:11px;color:var(--muted);font-family:var(--font-mono)">Latest PPO Checkpoint & Active Fleet State</span>
+      </div>
+      <div id="fleetMetricsGrid"></div>
+      <pre id="report">Loading backend fleet telemetry...</pre>
+    </section>
+
+    <!-- System Safety Shield Architecture Specs -->
+    <section class="glass hero-panel">
+      <div class="card-head">
+        <b>SAFETY ASSURANCE & GEODESIC NAVIGATION ARCHITECTURE</b>
+        <span style="font-size:11px;color:var(--green);font-weight:700">DUAL-AUTHORITY SAFETY SHIELD</span>
+      </div>
+      <div class="data-tags">
+        <span>Proximal Policy Optimization</span>
+        <span>256×256×128 Neural Policy MLP</span>
+        <span>Vectorized Multiprocess Rollouts</span>
+        <span>Curriculum Stage Routing</span>
+        <span>Action Masking (Hard Constraints)</span>
+        <span>Raster Distance-to-Coast Field (5 km Buffer)</span>
+        <span>Continuous Ellipsoid Segment Sweeps</span>
+        <span>Fuel & Hydrodynamic Drag Shaping</span>
+        <span>Procedural Oceanic Currents & Waves</span>
+        <span>Real-time Telemetry WebSocket Ready</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/analytics.js?v=500"></script>
+</body>
+</html>
